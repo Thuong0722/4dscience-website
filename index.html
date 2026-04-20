@@ -1,198 +1,1158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>4D Science GmbH | Preclinical CRO for Fibrosis &amp; Autoimmune Research</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4D Science GmbH | Preclinical CRO for Fibrosis & Autoimmune Research</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <style>
+    /* ─── RESET & BASE ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: #1a1a1a;
+      background: #ffffff;
+      line-height: 1.6;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── COLOR TOKENS ─── */
+    :root {
+      --teal:        #0F6E56;
+      --teal-light:  #E1F5EE;
+      --teal-mid:    #1D9E75;
+      --teal-dark:   #085041;
+      --teal-deep:   #04342C;
+      --teal-border: #9FE1CB;
+      --blue:        #185FA5;
+      --blue-light:  #E6F1FB;
+      --blue-border: #B5D4F4;
+      --blue-dark:   #0C447C;
+      --gray-bg:     #F7F6F2;
+      --gray-border: #E0DED8;
+      --gray-mid:    #888780;
+      --gray-text:   #555553;
+      --white:       #ffffff;
+      --radius-sm:   6px;
+      --radius-md:   10px;
+      --radius-lg:   14px;
+      --radius-pill: 100px;
+    }
+
+    /* ─── LAYOUT ─── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ─── NAVIGATION ─── */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 40px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--gray-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo { display: flex; flex-direction: column; gap: 2px; }
+    .logo-mark {
+      font-family: 'DM Serif Display', serif;
+      font-size: 30px;
+      letter-spacing: -1.5px;
+      line-height: 1;
+      color: var(--teal);
+    }
+    .logo-mark em { font-style: italic; color: var(--teal-mid); }
+    .logo-sub {
+      font-size: 9px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+    }
+    .nav-links { display: flex; gap: 4px; align-items: center; }
+    .nav-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      padding: 7px 14px;
+      border: none;
+      background: none;
+      color: var(--gray-text);
+      cursor: pointer;
+      border-radius: var(--radius-md);
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav-btn:hover { background: var(--teal-light); color: var(--teal-dark); }
+    .nav-btn.active { background: var(--teal-light); color: var(--teal-dark); font-weight: 500; }
+    .nav-cta {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 8px 18px;
+      background: var(--teal);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      margin-left: 10px;
+      transition: background 0.15s;
+    }
+    .nav-cta:hover { background: var(--teal-dark); }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: var(--teal-light);
+      padding: 72px 40px 60px;
+      border-bottom: 1px solid var(--teal-border);
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 52px;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      color: var(--teal-deep);
+      margin-bottom: 22px;
+      max-width: 700px;
+    }
+    .hero h1 em { font-style: italic; color: var(--teal); }
+    .hero-sub {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--teal-dark);
+      max-width: 640px;
+      margin-bottom: 36px;
+    }
+    .hero-diseases { font-weight: 500; color: var(--teal-deep); }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+    .btn-primary {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 12px 26px;
+      background: var(--teal);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-primary:hover { background: var(--teal-dark); }
+    .btn-secondary {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      padding: 12px 4px;
+      background: none;
+      border: none;
+      color: var(--teal);
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* ─── STATS BAR ─── */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--gray-border);
+    }
+    .stat {
+      padding: 24px 40px;
+      border-right: 1px solid var(--gray-border);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 38px;
+      color: var(--teal);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: var(--gray-text);
+      line-height: 1.45;
+      margin-top: 5px;
+    }
+
+    /* ─── SECTIONS ─── */
+    .section { padding: 48px 40px; border-bottom: 1px solid var(--gray-border); }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 28px;
+    }
+    .section-title {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+    }
+    .section-link {
+      font-size: 12px;
+      color: var(--teal);
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .section-link:hover { color: var(--teal-dark); }
+
+    /* ─── CAPABILITY GRID ─── */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--gray-border);
+      border: 1px solid var(--gray-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .pillar {
+      background: #fff;
+      padding: 24px 22px;
+    }
+    .pillar.full { grid-column: 1 / -1; }
+    .pillar-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      margin-bottom: 12px;
+    }
+    .pi-teal { background: var(--teal-light); }
+    .pi-blue { background: var(--blue-light); }
+    .pillar-name { font-size: 14px; font-weight: 500; margin-bottom: 7px; }
+    .pillar-desc { font-size: 12px; color: var(--gray-text); line-height: 1.6; }
+    .sub-list { margin-top: 10px; display: flex; flex-direction: column; gap: 4px; }
+    .sub-item { font-size: 11px; color: var(--gray-mid); }
+    .sub-item::before { content: '· '; }
+    .omics-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .omics-pill {
+      font-size: 11px;
+      padding: 3px 10px;
+      border: 1px solid var(--teal-border);
+      border-radius: var(--radius-pill);
+      color: var(--teal);
+      background: var(--teal-light);
+    }
+
+    /* ─── DISEASE TAGS ─── */
+    .disease-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+    .dtag {
+      font-size: 12px;
+      padding: 6px 14px;
+      border: 1px solid var(--gray-border);
+      border-radius: var(--radius-pill);
+      color: var(--gray-text);
+      background: var(--gray-bg);
+    }
+    .dtag.hi {
+      border-color: var(--teal);
+      color: var(--teal-dark);
+      background: var(--teal-light);
+      font-weight: 500;
+    }
+
+    /* ─── WHY CARDS ─── */
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .why-card {
+      border: 1px solid var(--gray-border);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      background: #fff;
+    }
+    .why-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-md);
+      background: var(--teal-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      margin-bottom: 12px;
+    }
+    .why-title { font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+    .why-desc { font-size: 12px; color: var(--gray-text); line-height: 1.6; }
+    .why-link {
+      font-size: 12px;
+      color: var(--teal);
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      margin-top: 10px;
+      display: inline-block;
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .tcard {
+      border: 1px solid var(--gray-border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      background: #fff;
+    }
+    .tcard-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--teal-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--teal-dark);
+      margin-bottom: 12px;
+    }
+    .tcard-quote {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--gray-text);
+      font-style: italic;
+      margin-bottom: 14px;
+    }
+    .tcard-name { font-size: 13px; font-weight: 500; }
+    .tcard-role { font-size: 11px; color: var(--gray-mid); margin-top: 2px; }
+
+    /* ─── PUBLICATIONS ─── */
+    .pub-list { display: flex; flex-direction: column; gap: 12px; }
+    .pub {
+      border: 1px solid var(--gray-border);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      background: #fff;
+    }
+    .pub-year {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 500;
+      padding: 2px 10px;
+      border-radius: var(--radius-pill);
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      margin-bottom: 8px;
+    }
+    .pub-title { font-size: 13px; font-weight: 500; line-height: 1.5; margin-bottom: 6px; }
+    .pub-meta { font-size: 11px; color: var(--gray-text); }
+    .pub-journal { font-style: italic; }
+    .pub-pmid { color: var(--blue); margin-left: 10px; }
+
+    /* ─── CTA BLOCK ─── */
+    .cta-block {
+      background: var(--teal-light);
+      padding: 72px 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--teal-border);
+    }
+    .cta-block h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 38px;
+      color: var(--teal-deep);
+      margin-bottom: 12px;
+    }
+    .cta-block p {
+      font-size: 14px;
+      color: var(--teal-dark);
+      margin-bottom: 28px;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      padding: 24px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--gray-border);
+    }
+    .footer-copy { font-size: 11px; color: var(--gray-mid); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a {
+      font-size: 11px;
+      color: var(--gray-mid);
+      cursor: pointer;
+    }
+    .footer-links a:hover { color: var(--teal); }
+
+    /* ─── PAGE HERO (inner pages) ─── */
+    .page-hero {
+      background: var(--teal-light);
+      padding: 52px 40px 40px;
+      border-bottom: 1px solid var(--teal-border);
+    }
+    .page-hero .eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 12px;
+    }
+    .page-hero h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 40px;
+      color: var(--teal-deep);
+      margin-bottom: 10px;
+    }
+    .page-hero p { font-size: 14px; color: var(--teal-dark); max-width: 540px; }
+
+    /* ─── SERVICES PAGE ─── */
+    .svc-category { padding: 40px 40px; border-bottom: 1px solid var(--gray-border); }
+    .cat-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .cat-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .cat-icon.teal { background: var(--teal-light); }
+    .cat-icon.blue { background: var(--blue-light); }
+    .cat-title { font-size: 18px; font-weight: 500; }
+    .cat-sub { font-size: 12px; color: var(--gray-text); margin-top: 3px; }
+    .model-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+    }
+    .model-card {
+      border: 1px solid var(--gray-border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      background: #fff;
+    }
+    .model-label {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--teal);
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .model-name { font-size: 13px; font-weight: 500; margin-bottom: 5px; }
+    .model-desc { font-size: 11px; color: var(--gray-text); line-height: 1.55; }
+
+    /* ─── PUBLICATIONS PAGE ─── */
+    .pub-filter { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+    .pfbtn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      padding: 6px 16px;
+      border: 1px solid var(--gray-border);
+      border-radius: var(--radius-pill);
+      background: var(--gray-bg);
+      color: var(--gray-text);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .pfbtn:hover { border-color: var(--teal); color: var(--teal); }
+    .pfbtn.on {
+      background: var(--teal-light);
+      border-color: var(--teal);
+      color: var(--teal-dark);
+      font-weight: 500;
+    }
+
+    /* ─── TEAM PAGE ─── */
+    .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .team-card {
+      border: 1px solid var(--gray-border);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      background: #fff;
+    }
+    .team-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--teal-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--teal-dark);
+      margin-bottom: 14px;
+    }
+    .team-name { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+    .team-role { font-size: 12px; color: var(--teal); margin-bottom: 8px; }
+    .team-bio { font-size: 12px; color: var(--gray-text); line-height: 1.6; }
+    .team-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .team-tag {
+      font-size: 10px;
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      border: 1px solid var(--blue-border);
+    }
+
+    /* ─── CONTACT PAGE ─── */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 48px;
+      padding: 48px 40px;
+    }
+    .contact-info h3 { font-size: 16px; font-weight: 500; margin-bottom: 20px; }
+    .contact-field { margin-bottom: 16px; }
+    .contact-field-label { font-size: 11px; color: var(--gray-mid); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .contact-field-val { font-size: 14px; }
+    .contact-field-val a { color: var(--blue); }
+    .contact-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .contact-tag {
+      font-size: 11px;
+      padding: 3px 10px;
+      border: 1px solid var(--teal-border);
+      border-radius: var(--radius-pill);
+      color: var(--teal);
+      background: var(--teal-light);
+    }
+    .form-section h3 { font-size: 16px; font-weight: 500; margin-bottom: 20px; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      color: var(--gray-mid);
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      padding: 10px 13px;
+      border: 1px solid var(--gray-border);
+      border-radius: var(--radius-md);
+      background: #fff;
+      color: #1a1a1a;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--teal); }
+    .form-group textarea { height: 100px; resize: vertical; }
+    .form-submit {
+      width: 100%;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 12px;
+      background: var(--teal);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      margin-top: 6px;
+      transition: background 0.15s;
+    }
+    .form-submit:hover { background: var(--teal-dark); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .nav { padding: 14px 20px; }
+      .nav-links .nav-btn:not(.nav-cta) { display: none; }
+      .hero { padding: 48px 20px 40px; }
+      .hero h1 { font-size: 36px; }
+      .stats-bar { grid-template-columns: 1fr; }
+      .stat { border-right: none; border-bottom: 1px solid var(--gray-border); }
+      .section { padding: 36px 20px; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .pillar.full { grid-column: 1; }
+      .why-grid, .testimonials-grid, .team-grid { grid-template-columns: 1fr; }
+      .model-grid { grid-template-columns: 1fr 1fr; }
+      .contact-layout { grid-template-columns: 1fr; gap: 32px; padding: 32px 20px; }
+      .svc-category { padding: 32px 20px; }
+      .page-hero { padding: 40px 20px 32px; }
+      .page-hero h2 { font-size: 30px; }
+      .cta-block { padding: 48px 20px; }
+      .cta-block h2 { font-size: 28px; }
+      .footer { padding: 20px; flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <nav class="navbar">
-    <a href="#" class="logo">4D<span>Science</span></a>
-    <ul class="nav-links">
-      <li><a href="#">Home</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#publications">Publications</a></li>
-      <li><a href="#team">Team</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <a href="#contact" class="btn-quote">Request a Quote</a>
-    <button class="nav-toggle" aria-label="Toggle menu">&#9776;</button>
-  </nav>
+<!-- ════════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════════ -->
+<nav class="nav">
+  <div class="logo">
+    <div class="logo-mark">4<em>D</em> Science</div>
+    <div class="logo-sub">GmbH · Preclinical CRO</div>
+  </div>
+  <div class="nav-links">
+    <button class="nav-btn active" onclick="showPage('home', this)">Home</button>
+    <button class="nav-btn" onclick="showPage('services', this)">Services</button>
+    <button class="nav-btn" onclick="showPage('publications', this)">Publications</button>
+    <button class="nav-btn" onclick="showPage('team', this)">Team</button>
+    <button class="nav-btn" onclick="showPage('contact', this)">Contact</button>
+    <button class="nav-cta" onclick="showPage('contact', document.querySelectorAll('.nav-btn')[4])">Request a quote</button>
+  </div>
+</nav>
+
+
+<!-- ════════════════════════════════════════════
+     PAGE: HOME
+════════════════════════════════════════════ -->
+<div class="page active" id="p-home">
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-content">
-      <p class="hero-tag">Preclinical Contract Research Organization</p>
-      <h1>Advancing Fibrosis &amp; Autoimmune Research</h1>
-      <p class="hero-sub">Comprehensive preclinical studies across the full spectrum of fibrotic and autoimmune diseases &mdash; from SSc, cGvHD, IPF, and PPF to autoimmune-induced myocardial fibrosis, liver and kidney fibrosis, and myositis (ASyS).</p>
-      <p class="hero-tags-line">In vitro &middot; Ex vivo &middot; In vivo &middot; OMICs-based profiling &middot; Clinical trial sample analysis</p>
-      <div class="hero-buttons">
-        <a href="#services" class="btn-primary">Explore Services &amp; Request Quote</a>
-        <a href="#contact" class="btn-secondary">Get in Touch</a>
+    <div class="hero-eyebrow">Preclinical Contract Research Organisation · Germany</div>
+    <h1>Expert preclinical research in<br><em>fibrosis &amp; autoimmune disease</em></h1>
+    <p class="hero-sub">
+      Comprehensive studies across the full spectrum of fibrotic and autoimmune diseases —
+      <span class="hero-diseases">SSc, cGvHD, IPF, PPF, autoimmune-induced myocardial fibrosis,
+      liver &amp; kidney fibrosis, and myositis (ASyS)</span> — from in vitro and ex vivo to in vivo,
+      OMICs-based profiling, and clinical trial sample analysis.
+    </p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="showPage('services', document.querySelectorAll('.nav-btn')[1])">Explore services &amp; request quote</button>
+      <button class="btn-secondary" onclick="showPage('contact', document.querySelectorAll('.nav-btn')[4])">Get in touch</button>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Research pillars from in vitro to clinical sample profiling</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">15+</div>
+      <div class="stat-label">Validated disease models across fibrosis &amp; autoimmune indications</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">60+</div>
+      <div class="stat-label">Peer-reviewed publications in top rheumatology journals</div>
+    </div>
+  </div>
+
+  <!-- RESEARCH CAPABILITIES -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-title">Research capabilities</span>
+      <span class="section-link" onclick="showPage('services', document.querySelectorAll('.nav-btn')[1])">View all services →</span>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-icon pi-teal">🧫</div>
+        <div class="pillar-name">In vitro</div>
+        <div class="pillar-desc">Extensive model portfolio from monolayer cultures to advanced 3D systems and organoids.</div>
+        <div class="sub-list">
+          <span class="sub-item">Monolayer: fibroblasts, ECs, pericytes, iPSC-derived macrophages, PBMCs</span>
+          <span class="sub-item">Organotypic: 3D skin equivalents, cardiac microtissues, adipoids</span>
+          <span class="sub-item">Organoids: skin, lung, blood vessel</span>
+          <span class="sub-item">Organ-on-chip: skin, lung, and combinations</span>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon pi-teal">🔬</div>
+        <div class="pillar-name">Ex vivo</div>
+        <div class="pillar-desc">Precision-cut tissue slices from patient biopsies preserving native tissue architecture, cellular diversity, and microenvironment for direct drug testing.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon pi-teal">🐁</div>
+        <div class="pillar-name">In vivo</div>
+        <div class="pillar-desc">Validated murine disease models covering dermal, pulmonary, liver, kidney, cardiac fibrosis, and autoimmune indications.</div>
+        <div class="sub-list">
+          <span class="sub-item">Bleomycin-induced dermal fibrosis</span>
+          <span class="sub-item">Bleomycin-induced pulmonary fibrosis</span>
+          <span class="sub-item">Chronic sclerodermatous graft-versus-host disease</span>
+          <span class="sub-item">Topoisomerase-I-induced dermal &amp; pulmonary fibrosis</span>
+          <span class="sub-item">HisRS-induced Anti-Synthetase Syndrome</span>
+          <span class="sub-item">CCl4-induced liver fibrosis</span>
+          <span class="sub-item">UUO model of kidney fibrosis</span>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon pi-blue">🧬</div>
+        <div class="pillar-name">OMICs-based profiling &amp; bioinformatics</div>
+        <div class="pillar-desc">Coordination of multi-omics data acquisition and custom bioinformatic analyses through expert collaborations.</div>
+        <div class="omics-pills">
+          <span class="omics-pill">Xenium spatial transcriptomics</span>
+          <span class="omics-pill">scRNA-seq / snRNA-seq</span>
+          <span class="omics-pill">Imaging mass cytometry</span>
+          <span class="omics-pill">ChIP-seq</span>
+          <span class="omics-pill">ATAC-seq</span>
+          <span class="omics-pill">Perturb-seq</span>
+          <span class="omics-pill">Ribo-seq</span>
+          <span class="omics-pill">Bulk RNA-seq</span>
+          <span class="omics-pill">Custom bioinformatics</span>
+        </div>
+      </div>
+      <div class="pillar full">
+        <div class="pillar-icon pi-blue">🏥</div>
+        <div class="pillar-name">Profiling of clinical trial samples</div>
+        <div class="pillar-desc">Comprehensive analysis of samples from clinical trials, bridging preclinical insights with clinical outcomes — Histology · IF/IHC staining of targets · OMICs-based profiling · FACS analysis</div>
       </div>
     </div>
   </section>
 
-  <!-- FIVE PILLARS -->
-  <section class="section pillars" id="services">
-    <p class="section-tag">OUR EXPERTISE</p>
-    <h2>Five Pillars of Research</h2>
-    <div class="cards">
-      <div class="card">
-        <div class="card-icon">&#129515;</div>
-        <h3>In Vitro</h3>
-        <p>Monolayer cultures (fibroblasts, ECs, pericytes, iPSC-derived macrophages, PBMCs), organotypic models (3D skin equivalents, cardiac microtissues, adipoids), organoids (skin, lung, blood vessel), and organ-on-chip (skin, lung, combinations).</p>
-        <a href="#services" class="card-link">View details</a>
-      </div>
-      <div class="card">
-        <div class="card-icon">&#128300;</div>
-        <h3>Ex Vivo</h3>
-        <p>Precision-cut tissue slices from patient biopsies preserving native tissue architecture, cellular diversity, and microenvironment for direct drug testing.</p>
-        <a href="#services" class="card-link">View details</a>
-      </div>
-      <div class="card">
-        <div class="card-icon">&#128001;</div>
-        <h3>In Vivo</h3>
-        <p>Bleomycin-induced dermal and pulmonary fibrosis, cGvHD, Topoisomerase-I-induced SSc, HisRS-induced ASyS, CCl4-induced liver fibrosis, UUO kidney fibrosis, and more.</p>
-        <a href="#services" class="card-link">View details</a>
-      </div>
-      <div class="card">
-        <div class="card-icon">&#129514;</div>
-        <h3>OMICs-Based Profiling &amp; Bioinformatics</h3>
-        <p>Xenium spatial transcriptomics, single cell/nucleus RNA-seq, Imaging Mass Cytometry, ChIP-seq, ATAC-seq, Perturb-seq, Ribo-seq, Bulk RNA-seq, and custom bioinformatic analyses.</p>
-        <a href="#services" class="card-link">View details</a>
-      </div>
-      <div class="card">
-        <div class="card-icon">&#127973;</div>
-        <h3>Clinical Trial Sample Profiling</h3>
-        <p>Histology, IF/IHC staining of targets, OMICs-based profiling, and FACS analysis of samples from clinical trials &mdash; bridging preclinical insights with clinical outcomes.</p>
-        <a href="#services" class="card-link">View details</a>
-      </div>
+  <!-- DISEASE AREAS -->
+  <section class="section">
+    <div class="section-header"><span class="section-title">Disease areas</span></div>
+    <div class="disease-tags">
+      <span class="dtag hi">Systemic sclerosis (SSc)</span>
+      <span class="dtag hi">IPF</span>
+      <span class="dtag hi">cGvHD</span>
+      <span class="dtag hi">PPF</span>
+      <span class="dtag">Autoimmune-induced myocardial fibrosis</span>
+      <span class="dtag">Liver fibrosis</span>
+      <span class="dtag">Kidney fibrosis</span>
+      <span class="dtag">Myositis (ASyS)</span>
+      <span class="dtag">Biomarker discovery</span>
     </div>
-  </section>
-
-  <!-- MISSION -->
-  <section class="section mission">
-    <p class="section-tag">OUR MISSION</p>
-    <blockquote>&ldquo;Committed to scientific excellence and innovation, driving the global effort to understand and treat fibrotic and autoimmune diseases.&rdquo;</blockquote>
   </section>
 
   <!-- WHY 4D SCIENCE -->
-  <section class="section why">
-    <p class="section-tag">WHY 4D SCIENCE?</p>
-    <h2>What Sets Us Apart</h2>
-    <div class="cards cards-3">
-      <div class="card">
-        <div class="card-icon">&#128104;&#8205;&#128300;</div>
-        <h3>Team of Dedicated Experts</h3>
-        <p>World-class researchers with deep expertise in fibrosis biology and autoimmune disease mechanisms.</p>
-        <a href="#team" class="card-link">Meet the team &rarr;</a>
+  <section class="section">
+    <div class="section-header"><span class="section-title">Why 4D Science?</span></div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">👨‍🔬</div>
+        <div class="why-title">Team of dedicated experts</div>
+        <div class="why-desc">World-class researchers with deep expertise in fibrosis biology and autoimmune disease mechanisms.</div>
+        <span class="why-link" onclick="showPage('team', document.querySelectorAll('.nav-btn')[3])">Meet the team →</span>
       </div>
-      <div class="card">
-        <div class="card-icon">&#129514;</div>
-        <h3>Unique &amp; Broad Model Portfolio</h3>
-        <p>From monolayer cultures to organ-on-chip, from organoids to in vivo disease models &mdash; the most comprehensive fibrosis model portfolio available.</p>
-        <a href="#services" class="card-link">Explore services &rarr;</a>
+      <div class="why-card">
+        <div class="why-icon">🧬</div>
+        <div class="why-title">Unique and broad model portfolio</div>
+        <div class="why-desc">From monolayer cultures to organ-on-chip, from organoids to in vivo disease models — one of the most comprehensive fibrosis model portfolios available.</div>
+        <span class="why-link" onclick="showPage('services', document.querySelectorAll('.nav-btn')[1])">Explore services →</span>
       </div>
-      <div class="card">
-        <div class="card-icon">&#9989;</div>
-        <h3>Rigorous Quality Control</h3>
-        <p>Blind tests, internal controls, and full data transparency for every experiment.</p>
+      <div class="why-card">
+        <div class="why-icon">✅</div>
+        <div class="why-title">Rigorous quality control</div>
+        <div class="why-desc">Blind tests, internal controls, and full data transparency for every experiment.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🤝</div>
+        <div class="why-title">Trusted by leading pharma</div>
+        <div class="why-desc">Proven track record partnering with top pharmaceutical companies on fibrosis and autoimmune drug programmes.</div>
+        <span class="why-link" onclick="showPage('contact', document.querySelectorAll('.nav-btn')[4])">Read partner statements →</span>
       </div>
     </div>
   </section>
 
   <!-- TESTIMONIALS -->
-  <section class="section testimonials" id="team">
-    <p class="section-tag">TRUSTED BY PROFESSIONALS</p>
-    <h2>What Our Partners Say</h2>
-    <div class="testimonial-grid">
-      <div class="testimonial">
-        <p>&ldquo;4D Science delivered exceptional quality in our fibrosis program. Their breadth of models and rigorous data gave us the confidence to advance our lead compound.&rdquo;</p>
-        <strong>Dr. Sarah M.</strong>
-        <span>Director of Preclinical Research</span>
+  <section class="section">
+    <div class="section-header"><span class="section-title">What our partners say</span></div>
+    <div class="testimonials-grid">
+      <div class="tcard">
+        <div class="tcard-avatar">SM</div>
+        <div class="tcard-quote">"4D Science delivered exceptional quality in our fibrosis programme. Their breadth of models and rigorous data gave us the confidence to advance our lead compound."</div>
+        <div class="tcard-name">Dr. Sarah M.</div>
+        <div class="tcard-role">Director of Preclinical Research</div>
       </div>
-      <div class="testimonial">
-        <p>&ldquo;The combination of in vivo expertise and OMICs profiling from 4D Science provided mechanistic insights we couldn&rsquo;t get elsewhere. A truly professional partner.&rdquo;</p>
-        <strong>Dr. James K.</strong>
-        <span>VP Drug Discovery</span>
+      <div class="tcard">
+        <div class="tcard-avatar">JK</div>
+        <div class="tcard-quote">"The combination of in vivo expertise and OMICs profiling provided mechanistic insights we couldn't get elsewhere. A truly professional partner."</div>
+        <div class="tcard-name">Dr. James K.</div>
+        <div class="tcard-role">VP Drug Discovery</div>
       </div>
-      <div class="testimonial">
-        <p>&ldquo;Working with 4D Science on our SSc and IPF programs has been outstanding. Their scientific depth and transparent communication set them apart from other CROs.&rdquo;</p>
-        <strong>Dr. Elena R.</strong>
-        <span>Head of Translational Biology</span>
+      <div class="tcard">
+        <div class="tcard-avatar">ER</div>
+        <div class="tcard-quote">"Working with 4D Science on our SSc and IPF programmes has been outstanding. Their scientific depth and transparent communication set them apart."</div>
+        <div class="tcard-name">Dr. Elena R.</div>
+        <div class="tcard-role">Head of Translational Biology</div>
       </div>
+      <div class="tcard">
+        <div class="tcard-avatar">MT</div>
+        <div class="tcard-quote">"The ex vivo tissue slice platform was exactly what we needed — unmatched access to patient-relevant disease biology for our target validation work."</div>
+        <div class="tcard-name">Dr. Michael T.</div>
+        <div class="tcard-role">Principal Scientist, Drug Development</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SELECTED PUBLICATIONS -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-title">Selected publications</span>
+      <span class="section-link" onclick="showPage('publications', document.querySelectorAll('.nav-btn')[2])">View all 19 publications →</span>
+    </div>
+    <div class="pub-list">
+      <div class="pub"><span class="pub-year">2026</span><div class="pub-title">Human blood vessel organoids recapitulate key mechanisms of transition from vasculopathy to fibrosis in systemic sclerosis</div><div class="pub-meta">Xiao Y et al. · <span class="pub-journal">Ann Rheum Dis</span><span class="pub-pmid">PMID: 41866288</span></div></div>
+      <div class="pub"><span class="pub-year">2025</span><div class="pub-title">Spatially informed phenotyping by cyclic-in-situ-hybridisation identifies novel fibroblast populations and their pathogenic niches in systemic sclerosis</div><div class="pub-meta">Li YN et al. · <span class="pub-journal">Ann Rheum Dis</span><span class="pub-pmid">PMID: 40603206</span></div></div>
+      <div class="pub"><span class="pub-year">2025</span><div class="pub-title">Antifibrotic effects of specific targeting of the 5-HT2B receptor in murine and ex vivo models of scleroderma skin</div><div class="pub-meta">Trinh-Minh T et al. · <span class="pub-journal">Arthritis Rheumatol</span><span class="pub-pmid">PMID: 40064593</span></div></div>
+      <div class="pub"><span class="pub-year">2024</span><div class="pub-title">Noncanonical WNT5A controls the activation of latent TGF-β to drive fibroblast activation and tissue fibrosis</div><div class="pub-meta">Trinh-Minh T et al. · <span class="pub-journal">J Clin Invest</span><span class="pub-pmid">PMID: 38747285</span></div></div>
+      <div class="pub"><span class="pub-year">2019</span><div class="pub-title">Vascularised human skin equivalents as a novel in vitro model of skin fibrosis and platform for testing of antifibrotic drugs</div><div class="pub-meta">Matei AE et al. · <span class="pub-journal">Ann Rheum Dis</span><span class="pub-pmid">PMID: 31540936</span></div></div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="section cta" id="contact">
-    <h2>Ready to Advance Your Research?</h2>
-    <p>Select your models, choose readouts, and send us a tailored research request &mdash; all in one place.</p>
-    <a href="#contact" class="btn-primary">Build Your Research Request</a>
-  </section>
+  <div class="cta-block">
+    <h2>Ready to advance your research?</h2>
+    <p>Select your models, choose readouts, and send us a tailored research request — all in one place.</p>
+    <button class="btn-primary" style="font-size:15px; padding:14px 32px;" onclick="showPage('contact', document.querySelectorAll('.nav-btn')[4])">Build your research request</button>
+  </div>
 
-  <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-brand">
-      <p class="footer-logo">4D Science GmbH</p>
-      <p>A leading preclinical CRO specializing in systemic sclerosis, fibrosis, and myositis research with advanced omics capabilities.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Navigation</h4>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#services">Technology &amp; Omics</a></li>
-        <li><a href="#publications">Publications</a></li>
-        <li><a href="#team">About Us</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Research Areas</h4>
-      <ul>
-        <li>Systemic Sclerosis</li>
-        <li>Tissue Fibrosis &amp; IPF</li>
-        <li>Myositis</li>
-        <li>Biomarker Discovery</li>
-        <li>Spatial Transcriptomics</li>
-        <li>Drug Development</li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Trusted By</h4>
-      <ul>
-        <li>Pfizer</li>
-        <li>GSK</li>
-        <li>Boehringer Ingelheim</li>
-        <li>ArgenX</li>
-        <li>UCB &bull; Eli Lilly</li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Location</h4>
-      <p>Germany</p>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 4D Science GmbH. All rights reserved.</p>
-      <div class="footer-links">
-        <a href="#services">Omics Services</a>
-        <a href="#services">Disease Models</a>
-        <a href="#contact">Partner With Us</a>
-      </div>
+    <span class="footer-copy">© 2026 4D Science GmbH. All rights reserved.</span>
+    <div class="footer-links">
+      <a onclick="showPage('services', document.querySelectorAll('.nav-btn')[1])">Services</a>
+      <a onclick="showPage('publications', document.querySelectorAll('.nav-btn')[2])">Publications</a>
+      <a onclick="showPage('team', document.querySelectorAll('.nav-btn')[3])">Team</a>
+      <a onclick="showPage('contact', document.querySelectorAll('.nav-btn')[4])">Contact</a>
     </div>
   </footer>
+</div><!-- /home -->
 
-  <script>
-    // Mobile nav toggle
-    const toggle = document.querySelector('.nav-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
-  </script>
 
+<!-- ════════════════════════════════════════════
+     PAGE: SERVICES
+════════════════════════════════════════════ -->
+<div class="page" id="p-services">
+  <div class="page-hero">
+    <div class="eyebrow">Research capabilities</div>
+    <h2>Services &amp; disease models</h2>
+    <p>From single-cell cultures to complex in vivo models — a comprehensive portfolio for fibrosis and autoimmune drug development.</p>
+  </div>
+
+  <!-- IN VITRO -->
+  <div class="svc-category">
+    <div class="cat-header">
+      <div class="cat-icon teal">🧫</div>
+      <div>
+        <div class="cat-title">In vitro models</div>
+        <div class="cat-sub">Monolayer · Organotypic · Organoids · Organ-on-chip</div>
+      </div>
+    </div>
+    <div class="model-grid">
+      <div class="model-card"><div class="model-label">Monolayer</div><div class="model-name">Fibroblasts</div><div class="model-desc">Primary and iPSC-derived dermal, lung, and cardiac fibroblasts</div></div>
+      <div class="model-card"><div class="model-label">Monolayer</div><div class="model-name">Endothelial cells (ECs)</div><div class="model-desc">Human microvascular and macrovascular endothelial cells</div></div>
+      <div class="model-card"><div class="model-label">Monolayer</div><div class="model-name">Pericytes</div><div class="model-desc">Perivascular cells for vascular fibrosis modelling</div></div>
+      <div class="model-card"><div class="model-label">Monolayer</div><div class="model-name">iPSC-derived macrophages</div><div class="model-desc">Tissue-resident macrophage phenotypes from iPSC differentiation</div></div>
+      <div class="model-card"><div class="model-label">Monolayer</div><div class="model-name">PBMCs</div><div class="model-desc">Peripheral blood mononuclear cells from healthy and SSc donors</div></div>
+      <div class="model-card"><div class="model-label">Organotypic</div><div class="model-name">3D skin equivalents</div><div class="model-desc">Full-thickness vascularised skin models for antifibrotic drug testing</div></div>
+      <div class="model-card"><div class="model-label">Organotypic</div><div class="model-name">Cardiac microtissues</div><div class="model-desc">3D cardiac fibrosis models with functional readouts</div></div>
+      <div class="model-card"><div class="model-label">Organotypic</div><div class="model-name">Adipoids</div><div class="model-desc">Adipose tissue organotypic models for metabolic-fibrosis studies</div></div>
+      <div class="model-card"><div class="model-label">Organoid</div><div class="model-name">Skin organoids</div><div class="model-desc">Self-organising skin models with epidermal and dermal compartments</div></div>
+      <div class="model-card"><div class="model-label">Organoid</div><div class="model-name">Lung organoids</div><div class="model-desc">Airway and alveolar organoids for IPF and pulmonary fibrosis</div></div>
+      <div class="model-card"><div class="model-label">Organoid</div><div class="model-name">Blood vessel organoids</div><div class="model-desc">Vasculopathy-to-fibrosis transition modelling in SSc</div></div>
+      <div class="model-card"><div class="model-label">Organ-on-chip</div><div class="model-name">Skin-on-chip</div><div class="model-desc">Dynamic microfluidic skin fibrosis system</div></div>
+      <div class="model-card"><div class="model-label">Organ-on-chip</div><div class="model-name">Lung-on-chip</div><div class="model-desc">Biomechanical lung fibrosis model with breathing simulation</div></div>
+      <div class="model-card"><div class="model-label">Organ-on-chip</div><div class="model-name">Combination chips</div><div class="model-desc">Multi-organ microfluidic systems for systemic disease modelling</div></div>
+    </div>
+  </div>
+
+  <!-- EX VIVO -->
+  <div class="svc-category">
+    <div class="cat-header">
+      <div class="cat-icon teal">🔬</div>
+      <div>
+        <div class="cat-title">Ex vivo models</div>
+        <div class="cat-sub">Patient biopsies · Native tissue architecture preserved</div>
+      </div>
+    </div>
+    <div class="model-grid">
+      <div class="model-card"><div class="model-label">Tissue slice</div><div class="model-name">Skin biopsies</div><div class="model-desc">Precision-cut slices preserving SSc tissue microenvironment for direct drug testing</div></div>
+      <div class="model-card"><div class="model-label">Tissue slice</div><div class="model-name">Lung biopsies</div><div class="model-desc">IPF and pulmonary fibrosis patient-derived tissue slices</div></div>
+      <div class="model-card"><div class="model-label">Tissue slice</div><div class="model-name">Liver biopsies</div><div class="model-desc">Direct drug testing in native hepatic fibrosis architecture</div></div>
+    </div>
+  </div>
+
+  <!-- IN VIVO -->
+  <div class="svc-category">
+    <div class="cat-header">
+      <div class="cat-icon teal">🐁</div>
+      <div>
+        <div class="cat-title">In vivo models</div>
+        <div class="cat-sub">Validated murine disease models · C57BL/6 and transgenic strains</div>
+      </div>
+    </div>
+    <div class="model-grid">
+      <div class="model-card"><div class="model-label">Dermal fibrosis</div><div class="model-name">Bleomycin-induced dermal fibrosis</div><div class="model-desc">Gold-standard model for SSc skin involvement</div></div>
+      <div class="model-card"><div class="model-label">Pulmonary fibrosis</div><div class="model-name">Bleomycin-induced pulmonary fibrosis</div><div class="model-desc">IPF-relevant lung fibrosis model</div></div>
+      <div class="model-card"><div class="model-label">SSc</div><div class="model-name">Topoisomerase-I-induced SSc</div><div class="model-desc">Dermal and pulmonary fibrosis with autoimmune features</div></div>
+      <div class="model-card"><div class="model-label">GvHD</div><div class="model-name">Chronic sclerodermatous GvHD</div><div class="model-desc">Multi-organ fibrosis with immune activation, cGvHD model</div></div>
+      <div class="model-card"><div class="model-label">Myositis</div><div class="model-name">HisRS-induced Anti-Synthetase Syndrome</div><div class="model-desc">Inflammatory myopathy and interstitial lung disease model</div></div>
+      <div class="model-card"><div class="model-label">Liver fibrosis</div><div class="model-name">CCl4-induced liver fibrosis</div><div class="model-desc">Established model of hepatic fibrogenesis and cirrhosis</div></div>
+      <div class="model-card"><div class="model-label">Kidney fibrosis</div><div class="model-name">UUO model of kidney fibrosis</div><div class="model-desc">Unilateral ureteral obstruction model of renal fibrosis</div></div>
+    </div>
+  </div>
+
+  <!-- OMICS -->
+  <div class="svc-category">
+    <div class="cat-header">
+      <div class="cat-icon blue">🧬</div>
+      <div>
+        <div class="cat-title">OMICs-based profiling &amp; bioinformatics</div>
+        <div class="cat-sub">Coordination of data acquisition and custom bioinformatic analyses</div>
+      </div>
+    </div>
+    <div class="model-grid">
+      <div class="model-card"><div class="model-label">Spatial</div><div class="model-name">Xenium spatial transcriptomics</div><div class="model-desc">In situ gene expression with single-cell spatial resolution in tissue</div></div>
+      <div class="model-card"><div class="model-label">Single cell</div><div class="model-name">scRNA-seq / snRNA-seq</div><div class="model-desc">Transcriptomic profiling at single cell and nucleus resolution</div></div>
+      <div class="model-card"><div class="model-label">Spatial proteomics</div><div class="model-name">Imaging mass cytometry (IMC)</div><div class="model-desc">Multiplexed protein analysis with spatial resolution in tissue sections</div></div>
+      <div class="model-card"><div class="model-label">Epigenomics</div><div class="model-name">ChIP-seq</div><div class="model-desc">Histone modification and transcription factor binding profiling</div></div>
+      <div class="model-card"><div class="model-label">Epigenomics</div><div class="model-name">ATAC-seq</div><div class="model-desc">Chromatin accessibility mapping at genome-wide scale</div></div>
+      <div class="model-card"><div class="model-label">Functional genomics</div><div class="model-name">Perturb-seq</div><div class="model-desc">CRISPR-based functional screening with single-cell readout</div></div>
+      <div class="model-card"><div class="model-label">Translatomics</div><div class="model-name">Ribo-seq</div><div class="model-desc">Ribosome profiling for translational control analysis</div></div>
+      <div class="model-card"><div class="model-label">Transcriptomics</div><div class="model-name">Bulk RNA-seq</div><div class="model-desc">Differential expression and pathway analysis at tissue level</div></div>
+      <div class="model-card"><div class="model-label">Bioinformatics</div><div class="model-name">Custom analyses</div><div class="model-desc">Tailored bioinformatic pipelines for multi-omics integration</div></div>
+    </div>
+  </div>
+
+  <!-- CLINICAL SAMPLES -->
+  <div class="svc-category" style="border-bottom: none;">
+    <div class="cat-header">
+      <div class="cat-icon blue">🏥</div>
+      <div>
+        <div class="cat-title">Profiling of clinical trial samples</div>
+        <div class="cat-sub">Bridging preclinical insights with clinical outcomes</div>
+      </div>
+    </div>
+    <div class="model-grid">
+      <div class="model-card"><div class="model-label">Morphology</div><div class="model-name">Histology</div><div class="model-desc">H&amp;E, Masson's trichrome, and disease-specific staining panels</div></div>
+      <div class="model-card"><div class="model-label">Protein</div><div class="model-name">IF / IHC staining</div><div class="model-desc">Immunofluorescence and immunohistochemistry of fibrosis-relevant targets</div></div>
+      <div class="model-card"><div class="model-label">Multi-omics</div><div class="model-name">OMICs-based profiling</div><div class="model-desc">RNA-seq, spatial transcriptomics, and proteomics on clinical trial specimens</div></div>
+      <div class="model-card"><div class="model-label">Immunology</div><div class="model-name">FACS analysis</div><div class="model-desc">Multi-colour flow cytometry for immune cell phenotyping</div></div>
+    </div>
+  </div>
+
+  <div class="cta-block">
+    <h2>Build your research request</h2>
+    <p>Select your models, choose readouts, and send us a tailored proposal.</p>
+    <button class="btn-primary" style="font-size:15px; padding:14px 32px;" onclick="showPage('contact', document.querySelectorAll('.nav-btn')[4])">Get in touch</button>
+  </div>
+  <footer class="footer"><span class="footer-copy">© 2026 4D Science GmbH. All rights reserved.</span></footer>
+</div><!-- /services -->
+
+
+<!-- ════════════════════════════════════════════
+     PAGE: PUBLICATIONS
+════════════════════════════════════════════ -->
+<div class="page" id="p-publications">
+  <div class="page-hero">
+    <div class="eyebrow">Scientific output</div>
+    <h2>Publications</h2>
+    <p>Our research is published in leading peer-reviewed rheumatology, immunology, and translational medicine journals.</p>
+  </div>
+  <section class="section">
+    <div class="pub-filter">
+      <button class="pfbtn on" onclick="filterPubs('all', this)">All years</button>
+      <button class="pfbtn" onclick="filterPubs('2026', this)">2026</button>
+      <button class="pfbtn" onclick="filterPubs('2025', this)">2025</button>
+      <button class="pfbtn" onclick="filterPubs('2024', this)">2024</button>
+      <button class="pfbtn" onclick="filterPubs('2023', this)">2023</button>
+      <button class="pfbtn" onclick="filterPubs('older', this)">2019–2022</button>
+    </div>
+    <div class="pub-list" id="pub-list"></div>
+  </section>
+  <footer class="footer"><span class="footer-copy">© 2026 4D Science GmbH. All rights reserved.</span></footer>
+</div><!-- /publications -->
+
+
+<!-- ════════════════════════════════════════════
+     PAGE: TEAM
+════════════════════════════════════════════ -->
+<div class="page" id="p-team">
+  <div class="page-hero">
+    <div class="eyebrow">Our people</div>
+    <h2>Team of dedicated experts</h2>
+    <p>World-class researchers with deep expertise in fibrosis biology, autoimmune disease mechanisms, and translational research.</p>
+  </div>
+  <section class="section">
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">AHG</div>
+        <div class="team-name">Dr. András-Hajnal Györfi</div>
+        <div class="team-role">Co-founder &amp; Scientific Director</div>
+        <div class="team-bio">Expert in fibroblast biology, SSc pathogenesis, and preclinical model development. Extensive experience in in vivo and in vitro fibrosis research and translational drug development programmes.</div>
+        <div class="team-tags"><span class="team-tag">SSc</span><span class="team-tag">In vivo models</span><span class="team-tag">Fibroblast biology</span></div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">TMT</div>
+        <div class="team-name">Dr. Thuong Trinh-Minh</div>
+        <div class="team-role">Senior Scientist</div>
+        <div class="team-bio">Specialist in ex vivo tissue models, in vivo fibrosis models, and molecular mechanisms of TGF-β and WNT signalling in fibrosis. Pioneer in 3D skin equivalent models for antifibrotic drug testing.</div>
+        <div class="team-tags"><span class="team-tag">Ex vivo</span><span class="team-tag">TGF-β signalling</span><span class="team-tag">WNT pathway</span><span class="team-tag">3D models</span></div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">ARR</div>
+        <div class="team-name">Dr. Aleix Rius Rigau</div>
+        <div class="team-role">Senior Scientist</div>
+        <div class="team-bio">Expert in spatial proteomics, imaging mass cytometry, and vascular biology in systemic sclerosis. Pioneer in spatial characterisation of fibroblast subsets and vascular niches in SSc tissue.</div>
+        <div class="team-tags"><span class="team-tag">Imaging mass cytometry</span><span class="team-tag">Spatial proteomics</span><span class="team-tag">Vascular biology</span></div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">YNL</div>
+        <div class="team-name">Dr. Yi-Nan Li</div>
+        <div class="team-role">Scientist</div>
+        <div class="team-bio">Specialist in spatial transcriptomics and single-cell approaches for fibroblast phenotyping and pathway analysis in fibrotic diseases, with focus on cyclic in situ hybridisation methods.</div>
+        <div class="team-tags"><span class="team-tag">Spatial transcriptomics</span><span class="team-tag">scRNA-seq</span><span class="team-tag">Fibroblast phenotyping</span></div>
+      </div>
+    </div>
+  </section>
+  <div class="cta-block">
+    <h2>Work with our team</h2>
+    <p>Collaborate with world-class experts in fibrosis and autoimmune disease research.</p>
+    <button class="btn-primary" style="font-size:15px; padding:14px 32px;" onclick="showPage('contact', document.querySelectorAll('.nav-btn')[4])">Get in touch</button>
+  </div>
+  <footer class="footer"><span class="footer-copy">© 2026 4D Science GmbH. All rights reserved.</span></footer>
+</div><!-- /team -->
+
+
+<!-- ════════════════════════════════════════════
+     PAGE: CONTACT
+════════════════════════════════════════════ -->
+<div class="page" id="p-contact">
+  <div class="page-hero">
+    <div class="eyebrow">Get in touch</div>
+    <h2>Contact &amp; request a quote</h2>
+    <p>Tell us about your research programme and we'll get back to you within 2 business days.</p>
+  </div>
+  <div class="contact-layout">
+    <div class="contact-info">
+      <h3>Contact information</h3>
+      <div class="contact-field">
+        <div class="contact-field-label">Organisation</div>
+        <div class="contact-field-val">4D Science GmbH</div>
+      </div>
+      <div class="contact-field">
+        <div class="contact-field-label">Location</div>
+        <div class="contact-field-val">Erlangen, Germany</div>
+      </div>
+      <div class="contact-field">
+        <div class="contact-field-label">Email</div>
+        <div class="contact-field-val"><a href="mailto:info@4dscience.de">info@4dscience.de</a></div>
+      </div>
+      <div class="contact-field" style="margin-top: 24px;">
+        <div class="contact-field-label">Research areas</div>
+        <div class="contact-tags">
+          <span class="contact-tag">SSc</span>
+          <span class="contact-tag">IPF</span>
+          <span class="contact-tag">cGvHD</span>
+          <span class="contact-tag">PPF</span>
+          <span class="contact-tag">Myositis (ASyS)</span>
+          <span class="contact-tag">Liver fibrosis</span>
+          <span class="contact-tag">Kidney fibrosis</span>
+          <span class="contact-tag">Myocardial fibrosis</span>
+        </div>
+      </div>
+    </div>
+    <div class="form-section">
+      <h3>Send a research request</h3>
+      <div class="form-group"><label>Name</label><input type="text" placeholder="Dr. Jane Smith"></div>
+      <div class="form-group"><label>Organisation</label><input type="text" placeholder="Pharma / Biotech company"></div>
+      <div class="form-group"><label>Email</label><input type="email" placeholder="jane@company.com"></div>
+      <div class="form-group">
+        <label>Disease area of interest</label>
+        <select>
+          <option>Systemic sclerosis (SSc)</option>
+          <option>IPF (idiopathic pulmonary fibrosis)</option>
+          <option>cGvHD (chronic graft-versus-host disease)</option>
+          <option>PPF (progressive pulmonary fibrosis)</option>
+          <option>Myositis / Anti-Synthetase Syndrome (ASyS)</option>
+          <option>Liver fibrosis</option>
+          <option>Kidney fibrosis</option>
+          <option>Autoimmune-induced myocardial fibrosis</option>
+          <option>Multiple indications</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Research request / message</label>
+        <textarea placeholder="Describe your research programme, models of interest, readouts required, or any questions about our capabilities..."></textarea>
+      </div>
+      <button class="form-submit">Send research request</button>
+    </div>
+  </div>
+  <footer class="footer"><span class="footer-copy">© 2026 4D Science GmbH. All rights reserved.</span></footer>
+</div><!-- /contact -->
+
+
+<!-- ════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
+<script>
+  /* ── PUBLICATIONS DATA ── */
+  const publications = [
+    { year: '2026', authors: 'Xiao Y, Hong X, Zhi L, et al.', title: 'Human blood vessel organoids recapitulate key mechanisms of transition from vasculopathy to fibrosis in systemic sclerosis', journal: 'Ann Rheum Dis', pmid: '41866288' },
+    { year: '2025', authors: 'Li YN, Filla T, Györfi AH, et al.', title: 'Spatially informed phenotyping by cyclic-in-situ-hybridisation identifies novel fibroblast populations and their pathogenic niches in systemic sclerosis', journal: 'Ann Rheum Dis', pmid: '40603206' },
+    { year: '2025', authors: 'Li Z, Rius Rigau A, Xie W, et al.', title: 'Spatial multiomics decipher fibroblast-macrophage dynamics in systemic sclerosis', journal: 'Ann Rheum Dis', pmid: '40410053' },
+    { year: '2025', authors: 'Trinh-Minh T, Tran-Manh C, Györfi AH, et al.', title: 'Antifibrotic effects of specific targeting of the 5-hydroxytryptamine 2B receptor (5-HT2BR) in murine models and ex vivo models of scleroderma skin', journal: 'Arthritis Rheumatol', pmid: '40064593' },
+    { year: '2025', authors: 'Kaufman J, Nabozny G, Tran-Manh C, et al.', title: 'Avenciguat: a novel soluble guanylate cyclase activator that affects multiple cell types to inhibit IFN-1 signalling and fibrosis', journal: 'Rheumatology (Oxford)', pmid: '39985455' },
+    { year: '2025', authors: 'Hong X, Xiao Y, Xu L, et al.', title: 'Combination therapies of porcupine inhibition with ruxolitinib, ibrutinib, or belumosudil in murine sclerodermatous GVHD', journal: 'Blood Adv', pmid: '39775728' },
+    { year: '2024', authors: 'Rius Rigau A, Liang M, Devakumar V, et al.', title: 'Imaging mass cytometry-based characterisation of fibroblast subsets and their cellular niches in systemic sclerosis', journal: 'Ann Rheum Dis', pmid: '39442983' },
+    { year: '2024', authors: 'Bergmann C, Chenguiti Fakhouri S, Trinh-Minh T, et al.', title: 'Mutual amplification of GLI2/Hedgehog and transcription factor JUN/AP-1 signaling in fibroblasts in systemic sclerosis: potential implications for combined therapies', journal: 'Arthritis Rheumatol', pmid: '39187464' },
+    { year: '2024', authors: 'Trinh-Minh T, Chen CW, Tran Manh C, et al.', title: 'Noncanonical WNT5A controls the activation of latent TGF-β to drive fibroblast activation and tissue fibrosis', journal: 'J Clin Invest', pmid: '38747285' },
+    { year: '2024', authors: 'Grönberg C, Rattik S, Tran-Manh C, et al.', title: 'Combined inhibition of IL-1, IL-33 and IL-36 signalling by targeting IL1RAP ameliorates skin and lung fibrosis in preclinical models of systemic sclerosis', journal: 'Ann Rheum Dis', pmid: '38594058' },
+    { year: '2024', authors: 'Rius Rigau A, Li YN, Matei AE, et al.', title: 'Characterization of vascular niche in systemic sclerosis by spatial proteomics', journal: 'Circ Res', pmid: '38440901' },
+    { year: '2024', authors: 'Trinh-Minh T, Györfi AH, Tomcik M, et al.', title: 'Effect of anti-S100A4 monoclonal antibody treatment on experimental skin fibrosis and systemic sclerosis-specific transcriptional signatures in human skin', journal: 'Arthritis Rheumatol', pmid: '38108109' },
+    { year: '2024', authors: 'Švec X, Štorkánová H, Trinh-Minh T, et al.', title: 'S100A4-neutralizing monoclonal antibody 6B12 counteracts the established experimental skin fibrosis induced by bleomycin', journal: 'Rheumatology (Oxford)', pmid: '37314987' },
+    { year: '2023', authors: 'Zhou X, Trinh-Minh T, Matei AE, et al.', title: 'Amelioration of fibrotic remodeling of human 3-dimensional full-thickness skin by transglutaminase 2 inhibition', journal: 'Arthritis Rheumatol', pmid: '37057394' },
+    { year: '2022', authors: 'Zhou X, Trinh-Minh T, Tran-Manh C, et al.', title: 'Impaired mitochondrial transcription factor A expression promotes mitochondrial damage to drive fibroblast activation and fibrosis in systemic sclerosis', journal: 'Arthritis Rheumatol', pmid: '34807516' },
+    { year: '2021', authors: 'Rius Rigau A, Luber M, Distler JHW.', title: 'Mouse models of skin fibrosis', journal: 'Methods Mol Biol', pmid: '34028755' },
+    { year: '2021', authors: 'Wollin L, Trinh-Minh T, Zhang Y, Distler JHW.', title: 'The effect of nintedanib versus mycophenolate mofetil in the Fra2 mouse model of systemic sclerosis-associated interstitial lung disease', journal: 'Clin Exp Rheumatol', pmid: '33886452' },
+    { year: '2021', authors: 'Zhang Y, Shen L, Dreißigacker K, et al.', title: 'Targeting of canonical WNT signaling ameliorates experimental sclerodermatous chronic graft-versus-host disease', journal: 'Blood', pmid: '33529322' },
+    { year: '2019', authors: 'Matei AE, Chen CW, Kiesewetter L, et al.', title: 'Vascularised human skin equivalents as a novel in vitro model of skin fibrosis and platform for testing of antifibrotic drugs', journal: 'Ann Rheum Dis', pmid: '31540936' },
+  ];
+
+  function renderPublications(filter) {
+    const list = document.getElementById('pub-list');
+    const filtered = filter === 'all'
+      ? publications
+      : filter === 'older'
+        ? publications.filter(p => parseInt(p.year) < 2023)
+        : publications.filter(p => p.year === filter);
+
+    list.innerHTML = filtered.map(p => `
+      <div class="pub">
+        <span class="pub-year">${p.year}</span>
+        <div class="pub-title">${p.title}</div>
+        <div class="pub-meta">${p.authors} · <span class="pub-journal">${p.journal}</span><span class="pub-pmid">PMID: ${p.pmid}</span></div>
+      </div>
+    `).join('');
+  }
+
+  function filterPubs(filter, btn) {
+    document.querySelectorAll('.pfbtn').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    renderPublications(filter);
+  }
+
+  /* ── PAGE NAVIGATION ── */
+  function showPage(pageId, btn) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('p-' + pageId).classList.add('active');
+    if (btn) btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* ── INIT ── */
+  renderPublications('all');
+</script>
 </body>
 </html>

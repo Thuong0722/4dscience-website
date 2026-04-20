@@ -118,6 +118,88 @@ section h2 {
   font-family: 'Cormorant Garamond', serif;
 }
 
+
+/* ===== COLORFUL PILLARS GRID ===== */
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.pillar-card {
+  padding: 2.5rem;
+  border-radius: 16px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pillar-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+}
+
+/* Individual pillar colors */
+.pillar-card.blue {
+  background: linear-gradient(135deg, #4F7FFF 0%, #3D63CC 100%);
+}
+
+.pillar-card.teal {
+  background: linear-gradient(135deg, #50B9AC 0%, #3D9489 100%);
+}
+
+.pillar-card.orange {
+  background: linear-gradient(135deg, #D8823C 0%, #C46B27 100%);
+}
+
+.pillar-card.purple {
+  background: linear-gradient(135deg, #8B5FD8 0%, #6D48B3 100%);
+}
+
+.pillar-card.red {
+  background: linear-gradient(135deg, #D14D65 0%, #B33D52 100%);
+}
+
+.pillar-card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.pillar-card h3 {
+  font-size: 1.6rem;
+  color: white;
+  margin-bottom: 1rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+}
+
+.pillar-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.95);
+  flex: 1;
+}
+
+.pillar-view-details {
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  transition: gap 0.3s;
+}
+
+.pillar-view-details:hover {
+  gap: 0.8rem;
+}
 /* ===== SERVICES ===== */
 .services-grid {
   display: grid;

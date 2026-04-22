@@ -398,6 +398,44 @@ img{max-width:100%;display:block;}
 .ha-mission-quote{font-family:'Cormorant Garamond',Georgia,serif;font-size:14px;font-style:italic;color:#5c5040;line-height:1.75;}
 .ha-bot{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,rgba(139,110,58,0.3) 30%,rgba(139,110,58,0.3) 70%,transparent);}
 @media(max-width:900px){.ha h1{font-size:36px;}.ha-content{max-width:100%;padding:0 20px;}.ha-joerg{width:150px;opacity:0.28;}.ha-team-right{width:120px;opacity:0.28;}.ha-vline,.ha-vline-r{display:none;}}
+
+/* ── MODULE CARDS (in vivo) ── */
+.mod-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:0 0 16px;}
+.mod-card{border:2px solid var(--gr200);border-radius:12px;padding:14px 16px;cursor:pointer;transition:border-color 0.15s,background 0.15s;background:var(--white);}
+.mod-card:hover{border-color:var(--ch500);}
+.mod-card.sel{border-color:var(--ch600);background:var(--ch100);}
+.mod-card-name{font-size:14px;font-weight:500;color:var(--gr900);margin-bottom:8px;}
+.mod-card-items{display:flex;flex-wrap:wrap;gap:4px;}
+.mod-card-item{font-size:11px;color:var(--gr700);padding:2px 8px;background:var(--ch200);border-radius:100px;}
+.mod-card.sel .mod-card-name{color:var(--ch700);}
+.mod-card.sel .mod-card-item{background:var(--ch300);}
+.mod-label{font-size:12px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--gr400);margin:20px 0 10px;}
+.dur-inline{display:inline-flex;flex-wrap:wrap;gap:6px;margin:4px 0 16px;}
+.dur-b2{font-size:11px;color:var(--gr700);background:var(--ch200);border-radius:100px;padding:3px 10px;font-weight:500;}
+/* ── EX VIVO CARD ── */
+.exvivo-card{border:1px solid var(--gr200);border-radius:12px;overflow:hidden;margin-bottom:16px;}
+.exvivo-card-hd{padding:16px 20px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;background:var(--white);transition:background 0.15s;}
+.exvivo-card-hd:hover{background:var(--ch100);}
+.exvivo-card-hd.open{background:var(--ch100);border-bottom:1px solid var(--gr200);}
+.exvivo-card-title{font-size:14px;font-weight:500;color:var(--gr900);}
+.exvivo-card-toggle{font-size:18px;color:var(--gr400);transition:transform 0.2s;}
+.exvivo-card-hd.open .exvivo-card-toggle{transform:rotate(45deg);}
+.exvivo-card-body{display:none;padding:20px;background:var(--white);}
+.exvivo-card-body.open{display:block;}
+/* ── OPTIONAL NOTES ── */
+.opt-notes{margin-top:12px;}
+.opt-label{font-size:13px;color:var(--gr400);margin-bottom:6px;}
+.opt-box{width:100%;border:1px solid var(--gr200);border-radius:8px;padding:10px 14px;font-size:13px;font-family:var(--fn);resize:vertical;min-height:80px;color:var(--gr900);}
+.opt-box:focus{outline:none;border-color:var(--ch500);}
+/* ── PILLAR CARDS clickable within services ── */
+.svc-pillar-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;max-width:1100px;margin:0 auto;}
+@media(max-width:900px){.svc-pillar-grid{grid-template-columns:repeat(2,1fr);}.mod-cards{grid-template-columns:1fr;}}
+.spc{border-radius:14px;padding:24px 20px;color:var(--white);display:flex;flex-direction:column;cursor:pointer;transition:transform 0.2s,opacity 0.2s;text-align:center;}
+.spc:hover{transform:translateY(-4px);opacity:0.92;}
+.spc-icon{font-size:28px;margin-bottom:10px;}
+.spc-title{font-family:var(--fs);font-size:18px;font-weight:400;margin-bottom:6px;}
+.spc-sub{font-size:11px;color:rgba(255,255,255,0.75);line-height:1.5;}
+
 </style>
 </head>
 <body>
@@ -590,69 +628,69 @@ img{max-width:100%;display:block;}
 
 <!-- ═══ SERVICES ═══ -->
 <div class="page" id="p-services">
+
+  <!-- FLOATING BACK TO TOP -->
+  <button id="svc-back-top" onclick="document.getElementById('svc-pillars').scrollIntoView({behavior:'smooth',block:'start'})">↑ Back to top</button>
+
   <div class="page-hero">
     <div class="page-hero-in">
       <div class="ph-ey">Research Capabilities</div>
       <h2>Services &amp; Disease Models</h2>
-      <p>Explore our research capabilities. Select models, cell types, and assays — then send your tailored research request.</p>
+      <p>Explore our research capabilities and select the services that fit your project.</p>
     </div>
   </div>
 
-  <!-- PILLARS OF RESEARCH at top of Services -->
+  <!-- 5 PILLARS NAV -->
   <div class="svc-pillars" id="svc-pillars">
     <div class="svc-pillars-in">
       <div class="sec-ey" style="margin-bottom:20px;">RESEARCH CAPABILITIES</div>
-      <h2 style="font-family:var(--fs);font-size:40px;font-weight:400;text-align:center;margin-bottom:36px;letter-spacing:-0.5px;">Pillars of Research</h2>
-      <div class="pillars-grid">
-        <div class="pc pc-blue" onclick="scrollToSvc('svc-invitro')">
-          <div class="pc-icon">🧫</div><div class="pc-title">In Vitro</div>
-          <div class="pc-desc">2D/3D cell culture, organoids and organ-on-chip models.<div class="pc-sub"><span>2D &amp; 3D culture</span><span>Organoids</span><span>Organ-on-chip</span></div></div>
-          <span class="pc-link">Jump to section →</span>
+      <h2 style="font-family:var(--fs);font-size:40px;font-weight:400;text-align:center;margin-bottom:32px;letter-spacing:-0.5px;">Pillars of Research</h2>
+      <div class="svc-pillar-grid">
+        <div class="spc pc-blue" onclick="jumpToSvc('svc-invitro')">
+          <div class="spc-icon">🧫</div>
+          <div class="spc-title">In Vitro</div>
+          <div class="spc-sub">2D/3D cell culture, organoids &amp; organ-on-chip</div>
         </div>
-        <div class="pc pc-teal" onclick="scrollToSvc('svc-exvivo')">
-          <div class="pc-icon">🔬</div><div class="pc-title">Ex Vivo</div>
-          <div class="pc-desc">Precision-cut tissue slices from SSc patient biopsies preserving native tissue architecture.</div>
-          <span class="pc-link">Jump to section →</span>
+        <div class="spc pc-teal" onclick="jumpToSvc('svc-exvivo')">
+          <div class="spc-icon">🔬</div>
+          <div class="spc-title">Ex Vivo</div>
+          <div class="spc-sub">Precision-cut patient tissue slices</div>
         </div>
-        <div class="pc pc-amber" onclick="scrollToSvc('svc-invivo')">
-          <div class="pc-icon">🐁</div><div class="pc-title">In Vivo</div>
-          <div class="pc-desc">Validated murine disease models.<div class="pc-sub"><span>Bleomycin-induced dermal &amp; pulmonary fibrosis</span><span>SSc models</span><span>Myositis</span></div></div>
-          <span class="pc-link">Jump to section →</span>
+        <div class="spc pc-amber" onclick="jumpToSvc('svc-invivo')">
+          <div class="spc-icon">🐁</div>
+          <div class="spc-title">In Vivo</div>
+          <div class="spc-sub">Validated murine disease models</div>
         </div>
-        <div class="pc pc-purple pc-wide" onclick="scrollToSvc('svc-omics')">
-          <div class="pc-icon">🧬</div><div class="pc-title">OMICs-Based Profiling &amp; Bioinformatics</div>
-          <div class="pc-desc">Multi-omics data acquisition and custom bioinformatic analyses.</div>
-          <div class="omics-pills"><span class="omics-pill">Xenium spatial transcriptomics</span><span class="omics-pill">scRNA-seq</span><span class="omics-pill">IMC</span><span class="omics-pill">ChIP-seq</span><span class="omics-pill">ATAC-seq</span></div>
-          <span class="pc-link">Jump to section →</span>
+        <div class="spc pc-purple" onclick="jumpToSvc('svc-omics')">
+          <div class="spc-icon">🧬</div>
+          <div class="spc-title">OMICs</div>
+          <div class="spc-sub">Multi-omics profiling &amp; bioinformatics</div>
         </div>
-        <div class="pc pc-crimson" onclick="scrollToSvc('svc-clinical')">
-          <div class="pc-icon">🏥</div><div class="pc-title">Clinical Samples</div>
-          <div class="pc-desc">Comprehensive analysis of clinical trial samples bridging preclinical insights with clinical outcomes.</div>
-          <span class="pc-link">Jump to section →</span>
+        <div class="spc pc-crimson" onclick="jumpToSvc('svc-clinical')">
+          <div class="spc-icon">🏥</div>
+          <div class="spc-title">Clinical</div>
+          <div class="spc-sub">Clinical trial sample profiling</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Back to Top floating button for Services page -->
-  <button id="svc-back-top" onclick="document.getElementById('svc-pillars').scrollIntoView({behavior:'smooth'})" title="Back to pillars">↑ Back to top</button>
-
-  <!-- IN VITRO -->
+  <!-- ── IN VITRO ── -->
   <div class="svc-cat" id="svc-invitro">
     <div class="svc-cat-in">
       <div class="svc-hd">
         <div class="svc-icon ci-b">🧫</div>
-        <div><div class="svc-title">In Vitro Models</div><div class="svc-sub">Click a model section to expand, select your cell types and assays, then add to your request</div></div>
+        <div><div class="svc-title">In Vitro Models</div><div class="svc-sub">Click a model section to expand, select cell types and assays, then add to your request</div></div>
       </div>
 
       <!-- 2D CELL CULTURE -->
       <div class="sub-model">
         <div class="sub-model-header" onclick="toggleSubModel(this)">
-          <div class="sub-model-title">Assays in 2D cell culture model (Fibroblasts, ECs, iPSC, etc.)</div>
+          <div class="sub-model-title">Assays in 2D cell culture model <span style="font-size:12px;font-weight:400;color:var(--gr400);">(Fibroblasts, ECs, iPSC, etc.)</span></div>
           <div class="sub-model-toggle">+</div>
         </div>
         <div class="sub-model-body" id="body-2d">
-          <div class="dur-row"><span class="dur-b">⏱ Duration: ~8–12 weeks</span></div>
+          <div class="dur-inline"><span class="dur-b2">⏱ Duration: ~8–12 weeks</span></div>
           <div class="sub-model-desc">Select cell type(s) from healthy donors or systemic sclerosis patients:</div>
           <div class="cell-chips">
             <span class="cell-chip" onclick="toggleChip(this)">Fibroblasts</span>
@@ -677,19 +715,22 @@ img{max-width:100%;display:block;}
           <div class="custom-assay-wrap" id="custom-2d">
             <input type="text" placeholder="Describe your custom assay…">
           </div>
-          <button class="add-btn" onclick="addSectionND('In Vitro — 2D Cell Culture','body-2d','assays-2d','fb-2d')">+ Add to my request</button>
+          <div class="opt-notes"><div class="opt-label">Optional notes</div>
+            <textarea class="opt-box" id="desc-2d" placeholder="Experimental goals, cell source, treatment conditions, disease context (optional)…"></textarea>
+          </div>
+          <button class="add-btn" onclick="addSection('In Vitro — 2D Cell Culture','body-2d','assays-2d','desc-2d','fb-2d')">+ Add to my request</button>
           <div class="added-msg" id="fb-2d">✓ Added to your request!</div>
         </div>
       </div>
 
-      <!-- 3D ORGANOTYPIC -->
+      <!-- 3D -->
       <div class="sub-model">
         <div class="sub-model-header" onclick="toggleSubModel(this)">
-          <div class="sub-model-title">Assays in 3D cell culture model (Skin equivalents, Cardiac microtissues, etc.)</div>
+          <div class="sub-model-title">Assays in 3D cell culture model <span style="font-size:12px;font-weight:400;color:var(--gr400);">(Skin equivalents, Cardiac microtissues, etc.)</span></div>
           <div class="sub-model-toggle">+</div>
         </div>
         <div class="sub-model-body" id="body-3d">
-          <div class="dur-row"><span class="dur-b">⏱ Duration: ~12–16 weeks</span></div>
+          <div class="dur-inline"><span class="dur-b2">⏱ Duration: ~12–16 weeks</span></div>
           <div class="sub-model-desc">Select model type(s):</div>
           <div class="cell-chips">
             <span class="cell-chip" onclick="toggleChip(this)">3D skin equivalent model</span>
@@ -707,7 +748,10 @@ img{max-width:100%;display:block;}
           <div class="custom-assay-wrap" id="custom-3d">
             <input type="text" placeholder="Describe your custom assay…">
           </div>
-          <button class="add-btn" onclick="addSectionND('In Vitro — 3D Cell Culture Models','body-3d','assays-3d','fb-3d')">+ Add to my request</button>
+          <div class="opt-notes"><div class="opt-label">Optional notes</div>
+            <textarea class="opt-box" id="desc-3d" placeholder="Experimental goals, compounds to test, readouts of interest (optional)…"></textarea>
+          </div>
+          <button class="add-btn" onclick="addSection('In Vitro — 3D Organotypic Models','body-3d','assays-3d','desc-3d','fb-3d')">+ Add to my request</button>
           <div class="added-msg" id="fb-3d">✓ Added to your request!</div>
         </div>
       </div>
@@ -715,11 +759,11 @@ img{max-width:100%;display:block;}
       <!-- ORGANOIDS -->
       <div class="sub-model">
         <div class="sub-model-header" onclick="toggleSubModel(this)">
-          <div class="sub-model-title">Assays in Organoids (skin, lung, and blood vessels from iPSC-derived healthy donors or SSc patients)</div>
+          <div class="sub-model-title">Assays in Organoids <span style="font-size:12px;font-weight:400;color:var(--gr400);">(skin, lung, blood vessels from iPSC-derived healthy donors or SSc patients)</span></div>
           <div class="sub-model-toggle">+</div>
         </div>
         <div class="sub-model-body" id="body-org">
-          <div class="dur-row"><span class="dur-b">⏱ Duration: 8 months+</span></div>
+          <div class="dur-inline"><span class="dur-b2">⏱ Duration: 8 months+</span></div>
           <div class="sub-model-desc">Select organoid type(s):</div>
           <div class="cell-chips">
             <span class="cell-chip" onclick="toggleChip(this)">Skin organoids</span>
@@ -739,7 +783,10 @@ img{max-width:100%;display:block;}
           <div class="custom-assay-wrap" id="custom-org">
             <input type="text" placeholder="Describe your custom assay…">
           </div>
-          <button class="add-btn" onclick="addSectionND('In Vitro — Organoids','body-org','assays-org','fb-org')">+ Add to my request</button>
+          <div class="opt-notes"><div class="opt-label">Optional notes</div>
+            <textarea class="opt-box" id="desc-org" placeholder="iPSC source, disease model, compounds, readouts (optional)…"></textarea>
+          </div>
+          <button class="add-btn" onclick="addSection('In Vitro — Organoids','body-org','assays-org','desc-org','fb-org')">+ Add to my request</button>
           <div class="added-msg" id="fb-org">✓ Added to your request!</div>
         </div>
       </div>
@@ -747,11 +794,11 @@ img{max-width:100%;display:block;}
       <!-- ORGAN-ON-CHIP -->
       <div class="sub-model">
         <div class="sub-model-header" onclick="toggleSubModel(this)">
-          <div class="sub-model-title">Assays in Organ-on-chip models (skin-on-chip, lung-on-chip, and combination)</div>
+          <div class="sub-model-title">Assays in Organ-on-chip models <span style="font-size:12px;font-weight:400;color:var(--gr400);">(skin-on-chip, lung-on-chip, and combination)</span></div>
           <div class="sub-model-toggle">+</div>
         </div>
         <div class="sub-model-body" id="body-chip">
-          <div class="dur-row"><span class="dur-b">⏱ Duration: 6 months+</span></div>
+          <div class="dur-inline"><span class="dur-b2">⏱ Duration: 6 months+</span></div>
           <div class="sub-model-desc">Select chip model(s):</div>
           <div class="cell-chips">
             <span class="cell-chip" onclick="toggleChip(this)">Skin-on-chip</span>
@@ -769,7 +816,10 @@ img{max-width:100%;display:block;}
           <div class="custom-assay-wrap" id="custom-chip">
             <input type="text" placeholder="Describe your custom assay…">
           </div>
-          <button class="add-btn" onclick="addSectionND('In Vitro — Organ-on-chip','body-chip','assays-chip','fb-chip')">+ Add to my request</button>
+          <div class="opt-notes"><div class="opt-label">Optional notes</div>
+            <textarea class="opt-box" id="desc-chip" placeholder="Flow conditions, compounds, readouts (optional)…"></textarea>
+          </div>
+          <button class="add-btn" onclick="addSection('In Vitro — Organ-on-chip','body-chip','assays-chip','desc-chip','fb-chip')">+ Add to my request</button>
           <div class="added-msg" id="fb-chip">✓ Added to your request!</div>
         </div>
       </div>
@@ -777,248 +827,272 @@ img{max-width:100%;display:block;}
     </div>
   </div>
 
-  <!-- IN VIVO -->
+  <!-- ── EX VIVO ── -->
+  <div class="svc-cat" id="svc-exvivo">
+    <div class="svc-cat-in">
+      <div class="svc-hd">
+        <div class="svc-icon ci-t">🔬</div>
+        <div><div class="svc-title">Ex Vivo Human Tissue Models</div><div class="svc-sub">Precision-cut patient tissue slices preserving native architecture</div></div>
+      </div>
+
+      <div class="exvivo-card">
+        <div class="exvivo-card-hd" onclick="toggleExVivo(this)">
+          <div class="exvivo-card-title">Ex vivo — Precision cut slices from Skin derived Systemic Sclerosis patients</div>
+          <div class="exvivo-card-toggle">+</div>
+        </div>
+        <div class="exvivo-card-body" id="body-exvivo">
+          <div class="sub-model-desc" style="margin-bottom:14px;">Native SSc skin tissue slices preserving the dermal microenvironment and cellular diversity for direct drug screening. Maintains tissue architecture, cellular crosstalk, and disease-specific gene expression signatures.</div>
+          <div class="assay-label">Select services</div>
+          <div class="assay-row" id="assays-exvivo">
+            <span class="atag" onclick="toggleAssay(this)">Immunofluorescence staining</span>
+            <span class="atag" onclick="toggleAssay(this)">Histology (H&amp;E, Trichrome, Sirius red)</span>
+            <span class="atag atag-custom" id="atag-exomics" onclick="toggleAssay(this);toggleCustom('custom-exomics',this)">Omics analyses</span>
+            <span class="atag atag-custom" id="atag-excustom" onclick="toggleAssay(this);toggleCustom('custom-excustom',this)">✦ Custom service</span>
+          </div>
+          <div class="custom-assay-wrap" id="custom-exomics">
+            <textarea style="width:100%;border:1px solid var(--gr200);border-radius:8px;padding:10px;font-size:13px;font-family:var(--fn);resize:vertical;min-height:80px;" placeholder="Please specify: omics type (e.g. bulk RNA-seq, scRNA-seq, spatial transcriptomics), number of samples, tissue type, biological question…"></textarea>
+          </div>
+          <div class="custom-assay-wrap" id="custom-excustom">
+            <textarea style="width:100%;border:1px solid var(--gr200);border-radius:8px;padding:10px;font-size:13px;font-family:var(--fn);resize:vertical;min-height:80px;" placeholder="Describe your custom service: type of analysis, sample count, specific requirements…"></textarea>
+          </div>
+          <button class="add-btn" onclick="addExVivo()">+ Add to my request</button>
+          <div class="added-msg" id="fb-exvivo">✓ Added to your request!</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── IN VIVO ── -->
   <div class="svc-cat" id="svc-invivo">
     <div class="svc-cat-in">
       <div class="svc-hd">
         <div class="svc-icon ci-a">🐁</div>
-        <div><div class="svc-title">In Vivo Models</div><div class="svc-sub">Click any model to expand, select modules, and add to your request</div></div>
+        <div><div class="svc-title">In Vivo Models</div><div class="svc-sub">Click a model to expand, select modules, then add to your request</div></div>
       </div>
-      <div class="invivo-desc">4D Science GmbH provides a comprehensive range of validated murine disease models spanning fibrosis, autoimmune conditions, and systemic diseases. Click any model to view details and select modules.</div>
+      <div class="invivo-desc">At 4D Science GmbH, we provide a comprehensive range of validated murine disease models. Select the modules that match your readout needs — any custom requirements can be added via the custom module field.</div>
 
+      <!-- Bleomycin-Induced Dermal Fibrosis -->
       <div class="sub-model">
         <div class="sub-model-header" onclick="toggleSubModel(this)">
-          <div class="sub-model-title">Bleomycin-Induced Dermal Fibrosis</div>
+          <div class="sub-model-title"> Bleomycin-Induced Dermal Fibrosis</div>
           <div class="sub-model-toggle">+</div>
         </div>
-        <div class="sub-model-body" id="body-iv-bleo-d">
+        <div class="sub-model-body" id="body-bleo-d">
           <div class="sub-model-desc">Simulates fibrotic processes in SSc skin. Gold-standard model for dermal fibrosis and potential treatment strategies.</div>
-          <div class="dur-row">
-            <span class="dur-b">⏱ Total: 6 weeks</span>
-            <span class="dur-b">💉 Treatment: 3 weeks</span>
-            <span class="dur-b">🔬 Analysis: 4–6 weeks</span>
+          <div class="dur-inline">
+            <span class="dur-b2">⏱ Total: 6 weeks</span>
+            <span class="dur-b2">Treatment: 3 weeks</span>
+            <span class="dur-b2">Analysis: 4–6 weeks</span>
           </div>
-          <div class="assay-label">Select module(s)</div>
-          <div class="assay-row" id="mods-bleo-d">
-            <span class="atag" onclick="toggleAssay(this)">Skin module</span>
-            <span class="atag atag-custom" onclick="toggleAssay(this);toggleCustom('custom-iv-bleo-d',this)">✦ Custom service</span>
+          <div class="mod-label">Select modules:</div>
+          <div class="mod-cards" id="mods-bleo-d">
+          <div class="mod-card" onclick="toggleModCard(this,'bleo-d','Skin Module')" data-mod="Skin Module">
+            <div class="mod-card-name">🩹 Skin Module</div>
+            <div class="mod-card-items"><span class="mod-card-item">Paraffin embedding &amp; cutting</span><span class="mod-card-item">Masson's Trichrome</span><span class="mod-card-item">H&amp;E staining</span><span class="mod-card-item">IHC α-SMA</span><span class="mod-card-item">Hydroxyproline assay</span></div>
           </div>
-          <div class="mod-details" id="modinfo-bleo-d">
-            <div class="mod-detail"><span class="mod-detail-name">Skin module:</span> <span class="mod-detail-items">Paraffin embedding &amp; cutting · Masson's Trichrome staining · H&amp;E staining · IHC alpha-SMA staining · Hydroxyproline assay · Fibrotic readouts analysis</span></div>
           </div>
-          <div class="custom-assay-wrap" id="custom-iv-bleo-d">
-            <input type="text" placeholder="Describe your custom service needs…">
+          <div class="mod-label" style="margin-top:4px;">Custom module <span style="font-size:11px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--gr300);">— optional</span></div>
+          <div class="opt-notes">
+            <textarea class="opt-box" id="custom-bleo-d" placeholder="Add custom readouts, endpoints, or additional requirements (optional)…"></textarea>
           </div>
-          <button class="add-btn" onclick="addInVivoModel('Bleomycin-Induced Dermal Fibrosis','mods-bleo-d','custom-iv-bleo-d','fb-iv-bleo-d')">+ Add to my request</button>
-          <div class="added-msg" id="fb-iv-bleo-d">✓ Added to your request!</div>
+          <button class="add-btn" style="margin-top:14px;" onclick="addInVivo('Bleomycin-Induced Dermal Fibrosis','bleo-d','fb-bleo-d')">+ Add to my request</button>
+          <div class="added-msg" id="fb-bleo-d">✓ Added to your request!</div>
         </div>
       </div>
+      <!-- Topoisomerase-I-Induced Systemic Sclerosis -->
       <div class="sub-model">
         <div class="sub-model-header" onclick="toggleSubModel(this)">
-          <div class="sub-model-title">Topoisomerase-I-Induced Systemic Sclerosis</div>
+          <div class="sub-model-title"> Topoisomerase-I-Induced Systemic Sclerosis</div>
           <div class="sub-model-toggle">+</div>
         </div>
-        <div class="sub-model-body" id="body-iv-topo">
-          <div class="sub-model-desc">Mimics the autoimmune aspects of SSc, particularly the role of topoisomerase I antibodies, for studying systemic manifestations.</div>
-          <div class="dur-row">
-            <span class="dur-b">⏱ Total: 8 weeks</span>
-            <span class="dur-b">💉 Treatment: 6 weeks</span>
-            <span class="dur-b">🔬 Analysis: 6–8 weeks</span>
+        <div class="sub-model-body" id="body-topo">
+          <div class="sub-model-desc">Mimics the autoimmune aspects of SSc with topoisomerase I antibodies, for studying systemic manifestations.</div>
+          <div class="dur-inline">
+            <span class="dur-b2">⏱ Total: 8 weeks</span>
+            <span class="dur-b2">Treatment: 6 weeks</span>
+            <span class="dur-b2">Analysis: 6–8 weeks</span>
           </div>
-          <div class="assay-label">Select module(s)</div>
-          <div class="assay-row" id="mods-topo">
-            <span class="atag" onclick="toggleAssay(this)">Skin module</span>
-            <span class="atag" onclick="toggleAssay(this)">Lung module</span>
-            <span class="atag atag-custom" onclick="toggleAssay(this);toggleCustom('custom-iv-topo',this)">✦ Custom service</span>
+          <div class="mod-label">Select modules:</div>
+          <div class="mod-cards" id="mods-topo">
+          <div class="mod-card" onclick="toggleModCard(this,'topo','Skin Module')" data-mod="Skin Module">
+            <div class="mod-card-name">🩹 Skin Module</div>
+            <div class="mod-card-items"><span class="mod-card-item">Paraffin embedding &amp; cutting</span><span class="mod-card-item">Masson's Trichrome</span><span class="mod-card-item">H&amp;E staining</span><span class="mod-card-item">IHC α-SMA</span><span class="mod-card-item">Hydroxyproline assay</span></div>
           </div>
-          <div class="mod-details" id="modinfo-topo">
-            <div class="mod-detail"><span class="mod-detail-name">Skin module:</span> <span class="mod-detail-items">Paraffin embedding &amp; cutting · Masson's Trichrome staining · H&amp;E staining · IHC alpha-SMA staining · Hydroxyproline assay · Fibrotic readouts analysis</span></div>
-            <div class="mod-detail"><span class="mod-detail-name">Lung module:</span> <span class="mod-detail-items">Paraffin embedding &amp; cutting · Masson's Trichrome staining · H&amp;E staining · Sirius red staining · Hydroxyproline assay · Fibrotic readouts analysis</span></div>
+          <div class="mod-card" onclick="toggleModCard(this,'topo','Lung Module')" data-mod="Lung Module">
+            <div class="mod-card-name">🫁 Lung Module</div>
+            <div class="mod-card-items"><span class="mod-card-item">Paraffin embedding &amp; cutting</span><span class="mod-card-item">Masson's Trichrome</span><span class="mod-card-item">H&amp;E staining</span><span class="mod-card-item">Sirius red</span><span class="mod-card-item">Hydroxyproline assay</span><span class="mod-card-item">Fibrotic &amp; inflammatory readouts</span></div>
           </div>
-          <div class="custom-assay-wrap" id="custom-iv-topo">
-            <input type="text" placeholder="Describe your custom service needs…">
           </div>
-          <button class="add-btn" onclick="addInVivoModel('Topoisomerase-I-Induced Systemic Sclerosis','mods-topo','custom-iv-topo','fb-iv-topo')">+ Add to my request</button>
-          <div class="added-msg" id="fb-iv-topo">✓ Added to your request!</div>
+          <div class="mod-label" style="margin-top:4px;">Custom module <span style="font-size:11px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--gr300);">— optional</span></div>
+          <div class="opt-notes">
+            <textarea class="opt-box" id="custom-topo" placeholder="Add custom readouts, endpoints, or additional requirements (optional)…"></textarea>
+          </div>
+          <button class="add-btn" style="margin-top:14px;" onclick="addInVivo('Topoisomerase-I-Induced Systemic Sclerosis','topo','fb-topo')">+ Add to my request</button>
+          <div class="added-msg" id="fb-topo">✓ Added to your request!</div>
         </div>
       </div>
+      <!-- cGvHD-Induced Scleroderma -->
       <div class="sub-model">
         <div class="sub-model-header" onclick="toggleSubModel(this)">
-          <div class="sub-model-title">cGvHD-Induced Scleroderma</div>
+          <div class="sub-model-title"> cGvHD-Induced Scleroderma</div>
           <div class="sub-model-toggle">+</div>
         </div>
-        <div class="sub-model-body" id="body-iv-cgvhd">
+        <div class="sub-model-body" id="body-cgvhd">
           <div class="sub-model-desc">Chronic Graft-Versus-Host Disease inducing scleroderma-like symptoms for investigating multi-organ fibrosis and autoimmune conditions.</div>
-          <div class="dur-row">
-            <span class="dur-b">⏱ Total: 7 weeks</span>
-            <span class="dur-b">💉 Treatment: 4 weeks</span>
-            <span class="dur-b">🔬 Analysis: 6–8 weeks</span>
+          <div class="dur-inline">
+            <span class="dur-b2">⏱ Total: 7 weeks</span>
+            <span class="dur-b2">Treatment: 4 weeks</span>
+            <span class="dur-b2">Analysis: 6–8 weeks</span>
           </div>
-          <div class="assay-label">Select module(s)</div>
-          <div class="assay-row" id="mods-cgvhd">
-            <span class="atag" onclick="toggleAssay(this)">Skin module</span>
-            <span class="atag" onclick="toggleAssay(this)">Lung module</span>
-            <span class="atag" onclick="toggleAssay(this)">Liver module</span>
-            <span class="atag atag-custom" onclick="toggleAssay(this);toggleCustom('custom-iv-cgvhd',this)">✦ Custom service</span>
+          <div class="mod-label">Select modules:</div>
+          <div class="mod-cards" id="mods-cgvhd">
+          <div class="mod-card" onclick="toggleModCard(this,'cgvhd','Skin Module')" data-mod="Skin Module">
+            <div class="mod-card-name">🩹 Skin Module</div>
+            <div class="mod-card-items"><span class="mod-card-item">Paraffin embedding &amp; cutting</span><span class="mod-card-item">Masson's Trichrome</span><span class="mod-card-item">H&amp;E staining</span><span class="mod-card-item">IHC α-SMA</span><span class="mod-card-item">Hydroxyproline assay</span></div>
           </div>
-          <div class="mod-details" id="modinfo-cgvhd">
-            <div class="mod-detail"><span class="mod-detail-name">Skin module:</span> <span class="mod-detail-items">Paraffin embedding &amp; cutting · Masson's Trichrome staining · H&amp;E staining · IHC alpha-SMA staining · Hydroxyproline assay · Fibrotic readouts analysis</span></div>
-            <div class="mod-detail"><span class="mod-detail-name">Lung module:</span> <span class="mod-detail-items">Paraffin embedding &amp; cutting · Masson's Trichrome staining · H&amp;E staining · Sirius red staining · Hydroxyproline assay · Fibrotic readouts analysis</span></div>
-            <div class="mod-detail"><span class="mod-detail-name">Liver module:</span> <span class="mod-detail-items">Paraffin embedding &amp; cutting · Trichrome, H&amp;E, Sirius red · IHC alpha-SMA staining · Hydroxyproline assay · Fibrotic &amp; inflammatory readouts · ELISA: GOT (AST) · ELISA: GPT (ALT) · ELISA: gammaGT</span></div>
+          <div class="mod-card" onclick="toggleModCard(this,'cgvhd','Lung Module')" data-mod="Lung Module">
+            <div class="mod-card-name">🫁 Lung Module</div>
+            <div class="mod-card-items"><span class="mod-card-item">Paraffin embedding &amp; cutting</span><span class="mod-card-item">Masson's Trichrome</span><span class="mod-card-item">H&amp;E staining</span><span class="mod-card-item">Sirius red</span><span class="mod-card-item">Hydroxyproline assay</span><span class="mod-card-item">Fibrotic &amp; inflammatory readouts</span></div>
           </div>
-          <div class="custom-assay-wrap" id="custom-iv-cgvhd">
-            <input type="text" placeholder="Describe your custom service needs…">
+          <div class="mod-card" onclick="toggleModCard(this,'cgvhd','Liver Module')" data-mod="Liver Module">
+            <div class="mod-card-name">🫀 Liver Module</div>
+            <div class="mod-card-items"><span class="mod-card-item">Paraffin embedding &amp; cutting</span><span class="mod-card-item">Trichrome, H&amp;E, Sirius red</span><span class="mod-card-item">IHC α-SMA</span><span class="mod-card-item">Hydroxyproline assay</span><span class="mod-card-item">ELISA: GOT (AST)</span><span class="mod-card-item">ELISA: GPT (ALT)</span><span class="mod-card-item">ELISA: gammaGT</span></div>
           </div>
-          <button class="add-btn" onclick="addInVivoModel('cGvHD-Induced Scleroderma','mods-cgvhd','custom-iv-cgvhd','fb-iv-cgvhd')">+ Add to my request</button>
-          <div class="added-msg" id="fb-iv-cgvhd">✓ Added to your request!</div>
+          <div class="mod-card" onclick="toggleModCard(this,'cgvhd','Kidney Module')" data-mod="Kidney Module">
+            <div class="mod-card-name">🫘 Kidney Module</div>
+            <div class="mod-card-items"><span class="mod-card-item">Paraffin embedding &amp; cutting</span><span class="mod-card-item">Trichrome, H&amp;E, PAS, Sirius red</span><span class="mod-card-item">IHC α-SMA</span><span class="mod-card-item">Hydroxyproline assay</span></div>
+          </div>
+          </div>
+          <div class="mod-label" style="margin-top:4px;">Custom module <span style="font-size:11px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--gr300);">— optional</span></div>
+          <div class="opt-notes">
+            <textarea class="opt-box" id="custom-cgvhd" placeholder="Add custom readouts, endpoints, or additional requirements (optional)…"></textarea>
+          </div>
+          <button class="add-btn" style="margin-top:14px;" onclick="addInVivo('cGvHD-Induced Scleroderma','cgvhd','fb-cgvhd')">+ Add to my request</button>
+          <div class="added-msg" id="fb-cgvhd">✓ Added to your request!</div>
         </div>
       </div>
+      <!-- HisRS-Induced Anti-Synthetase Syndrome (Myositis) -->
       <div class="sub-model">
         <div class="sub-model-header" onclick="toggleSubModel(this)">
-          <div class="sub-model-title">HisRS-Induced Anti-Synthetase Syndrome (Myositis)</div>
+          <div class="sub-model-title"> HisRS-Induced Anti-Synthetase Syndrome (Myositis)</div>
           <div class="sub-model-toggle">+</div>
         </div>
-        <div class="sub-model-body" id="body-iv-hisrs">
+        <div class="sub-model-body" id="body-hisrs">
           <div class="sub-model-desc">Immunization with recombinant HisRS induces myositis and immune activation — a relevant model for anti-synthetase syndrome research.</div>
-          <div class="dur-row">
-            <span class="dur-b">⏱ Total: 12–16 weeks</span>
-            <span class="dur-b">💉 Treatment: 10–14 weeks</span>
-            <span class="dur-b">🔬 Analysis: 6–8 weeks</span>
+          <div class="dur-inline">
+            <span class="dur-b2">⏱ Total: 12–16 weeks</span>
+            <span class="dur-b2">Treatment: 10–14 weeks</span>
+            <span class="dur-b2">Analysis: 6–8 weeks</span>
           </div>
-          <div class="assay-label">Select module(s)</div>
-          <div class="assay-row" id="mods-hisrs">
-            <span class="atag" onclick="toggleAssay(this)">Muscle module</span>
-            <span class="atag atag-custom" onclick="toggleAssay(this);toggleCustom('custom-iv-hisrs',this)">✦ Custom service</span>
+          <div class="mod-label">Select modules:</div>
+          <div class="mod-cards" id="mods-hisrs">
+          <div class="mod-card" onclick="toggleModCard(this,'hisrs','Lung Module')" data-mod="Lung Module">
+            <div class="mod-card-name">🫁 Lung Module</div>
+            <div class="mod-card-items"><span class="mod-card-item">Paraffin embedding &amp; cutting</span><span class="mod-card-item">Masson's Trichrome</span><span class="mod-card-item">H&amp;E staining</span><span class="mod-card-item">Sirius red</span><span class="mod-card-item">Hydroxyproline assay</span><span class="mod-card-item">Fibrotic &amp; inflammatory readouts</span></div>
           </div>
-          <div class="mod-details" id="modinfo-hisrs">
-            <div class="mod-detail"><span class="mod-detail-name">Muscle module:</span> <span class="mod-detail-items">Paraffin embedding &amp; cutting · Masson's Trichrome staining · H&amp;E staining · Sirius red staining · Hydroxyproline assay · Fibrotic readouts analysis · GOT/GPT (serum enzymes) · Serum creatinine (kidney safety)</span></div>
+          <div class="mod-card" onclick="toggleModCard(this,'hisrs','Muscle Module')" data-mod="Muscle Module">
+            <div class="mod-card-name">💪 Muscle Module</div>
+            <div class="mod-card-items"><span class="mod-card-item">Paraffin embedding &amp; cutting</span><span class="mod-card-item">Masson's Trichrome</span><span class="mod-card-item">H&amp;E staining</span><span class="mod-card-item">Sirius red</span><span class="mod-card-item">Hydroxyproline assay</span><span class="mod-card-item">Serum GOT &amp; GPT</span><span class="mod-card-item">Serum creatinine (renal)</span></div>
           </div>
-          <div class="custom-assay-wrap" id="custom-iv-hisrs">
-            <input type="text" placeholder="Describe your custom service needs…">
           </div>
-          <button class="add-btn" onclick="addInVivoModel('HisRS-Induced Anti-Synthetase Syndrome (Myositis)','mods-hisrs','custom-iv-hisrs','fb-iv-hisrs')">+ Add to my request</button>
-          <div class="added-msg" id="fb-iv-hisrs">✓ Added to your request!</div>
+          <div class="mod-label" style="margin-top:4px;">Custom module <span style="font-size:11px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--gr300);">— optional</span></div>
+          <div class="opt-notes">
+            <textarea class="opt-box" id="custom-hisrs" placeholder="Add custom readouts, endpoints, or additional requirements (optional)…"></textarea>
+          </div>
+          <button class="add-btn" style="margin-top:14px;" onclick="addInVivo('HisRS-Induced Anti-Synthetase Syndrome (Myositis)','hisrs','fb-hisrs')">+ Add to my request</button>
+          <div class="added-msg" id="fb-hisrs">✓ Added to your request!</div>
         </div>
       </div>
+      <!-- Bleomycin-Induced Pulmonary Fibrosis -->
       <div class="sub-model">
         <div class="sub-model-header" onclick="toggleSubModel(this)">
-          <div class="sub-model-title">Bleomycin-Induced Pulmonary Fibrosis</div>
+          <div class="sub-model-title"> Bleomycin-Induced Pulmonary Fibrosis</div>
           <div class="sub-model-toggle">+</div>
         </div>
-        <div class="sub-model-body" id="body-iv-bleo-p">
+        <div class="sub-model-body" id="body-bleo-p">
           <div class="sub-model-desc">Induces fibrosis in the lungs to study pulmonary involvement in SSc and IPF, and test new therapeutic approaches.</div>
-          <div class="dur-row">
-            <span class="dur-b">⏱ Total: 4 weeks</span>
-            <span class="dur-b">💉 Treatment: 2 weeks</span>
-            <span class="dur-b">🔬 Analysis: 3–4 weeks</span>
+          <div class="dur-inline">
+            <span class="dur-b2">⏱ Total: 4 weeks</span>
+            <span class="dur-b2">Treatment: 2 weeks</span>
+            <span class="dur-b2">Analysis: 3–4 weeks</span>
           </div>
-          <div class="assay-label">Select module(s)</div>
-          <div class="assay-row" id="mods-bleo-p">
-            <span class="atag" onclick="toggleAssay(this)">Lung module</span>
-            <span class="atag atag-custom" onclick="toggleAssay(this);toggleCustom('custom-iv-bleo-p',this)">✦ Custom service</span>
+          <div class="mod-label">Select modules:</div>
+          <div class="mod-cards" id="mods-bleo-p">
+          <div class="mod-card" onclick="toggleModCard(this,'bleo-p','Lung Module')" data-mod="Lung Module">
+            <div class="mod-card-name">🫁 Lung Module</div>
+            <div class="mod-card-items"><span class="mod-card-item">Paraffin embedding &amp; cutting</span><span class="mod-card-item">Masson's Trichrome</span><span class="mod-card-item">H&amp;E staining</span><span class="mod-card-item">Sirius red</span><span class="mod-card-item">Hydroxyproline assay</span><span class="mod-card-item">Fibrotic &amp; inflammatory readouts</span></div>
           </div>
-          <div class="mod-details" id="modinfo-bleo-p">
-            <div class="mod-detail"><span class="mod-detail-name">Lung module:</span> <span class="mod-detail-items">Paraffin embedding &amp; cutting · Masson's Trichrome staining · H&amp;E staining · Sirius red staining · Hydroxyproline assay · Fibrotic readouts analysis</span></div>
           </div>
-          <div class="custom-assay-wrap" id="custom-iv-bleo-p">
-            <input type="text" placeholder="Describe your custom service needs…">
+          <div class="mod-label" style="margin-top:4px;">Custom module <span style="font-size:11px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--gr300);">— optional</span></div>
+          <div class="opt-notes">
+            <textarea class="opt-box" id="custom-bleo-p" placeholder="Add custom readouts, endpoints, or additional requirements (optional)…"></textarea>
           </div>
-          <button class="add-btn" onclick="addInVivoModel('Bleomycin-Induced Pulmonary Fibrosis','mods-bleo-p','custom-iv-bleo-p','fb-iv-bleo-p')">+ Add to my request</button>
-          <div class="added-msg" id="fb-iv-bleo-p">✓ Added to your request!</div>
+          <button class="add-btn" style="margin-top:14px;" onclick="addInVivo('Bleomycin-Induced Pulmonary Fibrosis','bleo-p','fb-bleo-p')">+ Add to my request</button>
+          <div class="added-msg" id="fb-bleo-p">✓ Added to your request!</div>
         </div>
       </div>
+      <!-- UUO-Induced Renal Fibrosis -->
       <div class="sub-model">
         <div class="sub-model-header" onclick="toggleSubModel(this)">
-          <div class="sub-model-title">UUO-Induced Renal Fibrosis</div>
+          <div class="sub-model-title"> UUO-Induced Renal Fibrosis</div>
           <div class="sub-model-toggle">+</div>
         </div>
-        <div class="sub-model-body" id="body-iv-uuo">
+        <div class="sub-model-body" id="body-uuo">
           <div class="sub-model-desc">Unilateral Ureteral Obstruction — a well-established model for progressive renal fibrosis mimicking human kidney damage.</div>
-          <div class="dur-row">
-            <span class="dur-b">⏱ Total: 4 weeks</span>
-            <span class="dur-b">💉 Treatment: 3 weeks</span>
-            <span class="dur-b">🔬 Analysis: 3–4 weeks</span>
+          <div class="dur-inline">
+            <span class="dur-b2">⏱ Total: 4 weeks</span>
+            <span class="dur-b2">Treatment: 3 weeks</span>
+            <span class="dur-b2">Analysis: 3–4 weeks</span>
           </div>
-          <div class="assay-label">Select module(s)</div>
-          <div class="assay-row" id="mods-uuo">
-            <span class="atag" onclick="toggleAssay(this)">Kidney module</span>
-            <span class="atag atag-custom" onclick="toggleAssay(this);toggleCustom('custom-iv-uuo',this)">✦ Custom service</span>
+          <div class="mod-label">Select modules:</div>
+          <div class="mod-cards" id="mods-uuo">
+          <div class="mod-card" onclick="toggleModCard(this,'uuo','Kidney Module')" data-mod="Kidney Module">
+            <div class="mod-card-name">🫘 Kidney Module</div>
+            <div class="mod-card-items"><span class="mod-card-item">Paraffin embedding & cutting</span><span class="mod-card-item">Trichrome, H&E, PAS, Sirius red</span><span class="mod-card-item">IHC α-SMA</span><span class="mod-card-item">Hydroxyproline assay</span></div>
           </div>
-          <div class="mod-details" id="modinfo-uuo">
-            <div class="mod-detail"><span class="mod-detail-name">Kidney module:</span> <span class="mod-detail-items">Paraffin embedding &amp; cutting · Trichrome, H&amp;E, PAS, Sirius red · IHC alpha-SMA staining · Hydroxyproline assay · Fibrotic &amp; inflammatory readouts</span></div>
           </div>
-          <div class="custom-assay-wrap" id="custom-iv-uuo">
-            <input type="text" placeholder="Describe your custom service needs…">
+          <div class="mod-label" style="margin-top:4px;">Custom module <span style="font-size:11px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--gr300);">— optional</span></div>
+          <div class="opt-notes">
+            <textarea class="opt-box" id="custom-uuo" placeholder="Add custom readouts, endpoints, or additional requirements (optional)…"></textarea>
           </div>
-          <button class="add-btn" onclick="addInVivoModel('UUO-Induced Renal Fibrosis','mods-uuo','custom-iv-uuo','fb-iv-uuo')">+ Add to my request</button>
-          <div class="added-msg" id="fb-iv-uuo">✓ Added to your request!</div>
+          <button class="add-btn" style="margin-top:14px;" onclick="addInVivo('UUO-Induced Renal Fibrosis','uuo','fb-uuo')">+ Add to my request</button>
+          <div class="added-msg" id="fb-uuo">✓ Added to your request!</div>
         </div>
       </div>
+      <!-- CCl₄-Induced Hepatic Fibrosis -->
       <div class="sub-model">
         <div class="sub-model-header" onclick="toggleSubModel(this)">
-          <div class="sub-model-title">CCl4-Induced Hepatic Fibrosis</div>
+          <div class="sub-model-title"> CCl₄-Induced Hepatic Fibrosis</div>
           <div class="sub-model-toggle">+</div>
         </div>
-        <div class="sub-model-body" id="body-iv-ccl4">
+        <div class="sub-model-body" id="body-ccl4">
           <div class="sub-model-desc">Carbon Tetrachloride induces hepatic fibrosis closely resembling human liver fibrosis with inflammation, stellate cell activation, and collagen deposition.</div>
-          <div class="dur-row">
-            <span class="dur-b">⏱ Total: 8 weeks</span>
-            <span class="dur-b">💉 Treatment: 6 weeks</span>
-            <span class="dur-b">🔬 Analysis: 3–4 weeks</span>
+          <div class="dur-inline">
+            <span class="dur-b2">⏱ Total: 8 weeks</span>
+            <span class="dur-b2">Treatment: 6 weeks</span>
+            <span class="dur-b2">Analysis: 3–4 weeks</span>
           </div>
-          <div class="assay-label">Select module(s)</div>
-          <div class="assay-row" id="mods-ccl4">
-            <span class="atag" onclick="toggleAssay(this)">Liver module</span>
-            <span class="atag atag-custom" onclick="toggleAssay(this);toggleCustom('custom-iv-ccl4',this)">✦ Custom service</span>
+          <div class="mod-label">Select modules:</div>
+          <div class="mod-cards" id="mods-ccl4">
+          <div class="mod-card" onclick="toggleModCard(this,'ccl4','Liver Module')" data-mod="Liver Module">
+            <div class="mod-card-name">🫀 Liver Module</div>
+            <div class="mod-card-items"><span class="mod-card-item">Paraffin embedding & cutting</span><span class="mod-card-item">Trichrome, H&E, Sirius red</span><span class="mod-card-item">IHC α-SMA</span><span class="mod-card-item">Hydroxyproline assay</span><span class="mod-card-item">ELISA: GOT (AST)</span><span class="mod-card-item">ELISA: GPT (ALT)</span><span class="mod-card-item">ELISA: gammaGT</span></div>
           </div>
-          <div class="mod-details" id="modinfo-ccl4">
-            <div class="mod-detail"><span class="mod-detail-name">Liver module:</span> <span class="mod-detail-items">Paraffin embedding &amp; cutting · Trichrome, H&amp;E, Sirius red · IHC alpha-SMA staining · Hydroxyproline assay · Fibrotic &amp; inflammatory readouts · ELISA: GOT (AST) · ELISA: GPT (ALT) · ELISA: gammaGT</span></div>
           </div>
-          <div class="custom-assay-wrap" id="custom-iv-ccl4">
-            <input type="text" placeholder="Describe your custom service needs…">
+          <div class="mod-label" style="margin-top:4px;">Custom module <span style="font-size:11px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--gr300);">— optional</span></div>
+          <div class="opt-notes">
+            <textarea class="opt-box" id="custom-ccl4" placeholder="Add custom readouts, endpoints, or additional requirements (optional)…"></textarea>
           </div>
-          <button class="add-btn" onclick="addInVivoModel('CCl4-Induced Hepatic Fibrosis','mods-ccl4','custom-iv-ccl4','fb-iv-ccl4')">+ Add to my request</button>
-          <div class="added-msg" id="fb-iv-ccl4">✓ Added to your request!</div>
+          <button class="add-btn" style="margin-top:14px;" onclick="addInVivo('CCl₄-Induced Hepatic Fibrosis','ccl4','fb-ccl4')">+ Add to my request</button>
+          <div class="added-msg" id="fb-ccl4">✓ Added to your request!</div>
         </div>
       </div>
 
     </div>
   </div>
 
-  <!-- EX VIVO -->
-  <div class="svc-cat" id="svc-exvivo">
-    <div class="svc-cat-in">
-      <div class="svc-hd"><div class="svc-icon ci-t">🔬</div><div><div class="svc-title">Ex Vivo Human Tissue Models</div><div class="svc-sub">Native tissue preserving the disease microenvironment for translational research.</div></div></div>
-
-      <div class="sub-model">
-        <div class="sub-model-header" onclick="toggleSubModel(this)">
-          <div class="sub-model-title">Ex vivo – Precision cut slices from Skin derived Systemic sclerosis patients</div>
-          <div class="sub-model-toggle">+</div>
-        </div>
-        <div class="sub-model-body" id="body-exvivo-ssc">
-          <div class="sub-model-desc">Precision-cut skin slices from SSc patients preserve the native dermal microenvironment including resident fibroblasts, immune cells, and extracellular matrix — enabling highly translational drug testing and mechanistic studies.</div>
-          <div class="assay-label">Select service(s)</div>
-          <div class="assay-row" id="assays-exvivo2">
-            <span class="atag" onclick="toggleAssay(this)">Immunofluorescence staining</span>
-            <span class="atag" onclick="toggleAssay(this)">Histology (H&amp;E, Trichrome, Sirius red)</span>
-            <span class="atag" onclick="toggleAssay(this);toggleCustom('exvivo-omics-wrap',this)">Omics analyses</span>
-            <span class="atag atag-custom" onclick="toggleAssay(this);toggleCustom('exvivo-custom-wrap',this)">✦ Custom service</span>
-          </div>
-          <div class="custom-assay-wrap" id="exvivo-omics-wrap" style="margin-top:10px;">
-            <textarea class="desc-box" id="exvivo-omics-text" placeholder="Describe your omics needs: type of omics analysis, number of samples, disease context, timepoints…" style="min-height:72px;"></textarea>
-          </div>
-          <div class="custom-assay-wrap" id="exvivo-custom-wrap" style="margin-top:10px;">
-            <textarea class="desc-box" id="exvivo-custom-text" placeholder="Describe your custom service request…" style="min-height:64px;"></textarea>
-          </div>
-          <button class="add-btn" onclick="addExVivo('assays-exvivo2','exvivo-omics-text','exvivo-custom-text','fb-exvivo2')">+ Add to my request</button>
-          <div class="added-msg" id="fb-exvivo2">✓ Added to your request!</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- OMICS -->
+  <!-- ── OMICS ── -->
   <div class="svc-cat" id="svc-omics">
     <div class="svc-cat-in">
       <div class="svc-hd"><div class="svc-icon ci-p">🧬</div><div><div class="svc-title">OMICs-Based Profiling &amp; Bioinformatics</div><div class="svc-sub">Coordination of data acquisition and custom bioinformatic analyses</div></div></div>
@@ -1036,12 +1110,15 @@ img{max-width:100%;display:block;}
         <span class="atag" onclick="toggleAssay(this)">Custom bioinformatic pipeline</span>
         <span class="atag" onclick="toggleAssay(this)">Multi-omics integration</span>
       </div>
-      <button class="add-btn" onclick="addSectionND('OMICs-Based Profiling &amp; Bioinformatics','assays-omics','fb-omics')">+ Add to my request</button>
+      <div class="opt-notes" style="margin-top:16px;"><div class="opt-label">Optional notes</div>
+        <textarea class="opt-box" id="desc-omics" placeholder="Sample type, disease indication, biological question, desired outputs (optional)…"></textarea>
+      </div>
+      <button class="add-btn" onclick="addSectionSimple('OMICs-Based Profiling &amp; Bioinformatics','assays-omics','desc-omics','fb-omics')">+ Add to my request</button>
       <div class="added-msg" id="fb-omics">✓ Added to your request!</div>
     </div>
   </div>
 
-  <!-- CLINICAL -->
+  <!-- ── CLINICAL ── -->
   <div class="svc-cat" id="svc-clinical" style="border-bottom:none;">
     <div class="svc-cat-in">
       <div class="svc-hd"><div class="svc-icon ci-c">🏥</div><div><div class="svc-title">Profiling of Clinical Trial Samples</div><div class="svc-sub">Bridging preclinical insights with clinical outcomes</div></div></div>
@@ -1055,7 +1132,10 @@ img{max-width:100%;display:block;}
         <span class="atag atag-custom" onclick="toggleAssay(this);toggleCustom('custom-clinical',this)">✦ Custom upon discussion</span>
       </div>
       <div class="custom-assay-wrap" id="custom-clinical"><input type="text" placeholder="Describe your custom request…"></div>
-      <button class="add-btn" onclick="addSectionND('Clinical Trial Sample Profiling','assays-clinical','fb-clinical')">+ Add to my request</button>
+      <div class="opt-notes" style="margin-top:16px;"><div class="opt-label">Optional notes</div>
+        <textarea class="opt-box" id="desc-clinical" placeholder="Sample types, study design, targets of interest, analytical requirements (optional)…"></textarea>
+      </div>
+      <button class="add-btn" onclick="addSectionSimple('Clinical Trial Sample Profiling','assays-clinical','desc-clinical','fb-clinical')">+ Add to my request</button>
       <div class="added-msg" id="fb-clinical">✓ Added to your request!</div>
     </div>
   </div>
@@ -1064,7 +1144,7 @@ img{max-width:100%;display:block;}
     <img src="data:image/png;base64,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" alt="4D Science GmbH" class="cta-logo">
     <h2>Ready to Send Your Request?</h2>
     <p>Review your selected services and send us your tailored research request.</p>
-    <button class="btn-cta" onclick="showPage('contact',null)">Go to Contact &amp; Summary →</button>
+    <button class="btn-cta" onclick="showPage('contact',document.querySelectorAll('.nav-btn')[4])">Go to Contact &amp; Summary →</button>
   </div>
   <footer class="footer"><div class="footer-bot" style="max-width:1100px;margin:0 auto;"><div class="footer-copy">© 2026 4D Science GmbH. All rights reserved.</div></div></footer>
 </div>
@@ -1245,14 +1325,10 @@ function filterPubs(f,btn){document.querySelectorAll('.pfbtn').forEach(b=>b.clas
 function showPage(id,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  const pg=document.getElementById('p-'+id);
-  if(pg)pg.classList.add('active');
+  document.getElementById('p-'+id).classList.add('active');
   if(btn)btn.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
   if(id==='contact')renderCart();
-  // Show/hide service back-to-top
-  const svcBtn=document.getElementById('svc-back-top');
-  if(svcBtn)svcBtn.classList.remove('visible');
 }
 function showPageSection(pageId,sectionId,btn){
   showPage(pageId,btn);
@@ -1286,25 +1362,16 @@ function getSelectedChips(bodyId){
   return Array.from(document.querySelectorAll('#'+bodyId+' .cell-chip.sel')).map(c=>c.textContent.trim());
 }
 
-function addSection(categoryName,bodyId,assayRowId,descId,errId,fbId){
-  const descEl=document.getElementById(descId);
-  const desc=descEl.value.trim();
-  if(!desc){
-    descEl.classList.add('err');
-    document.getElementById(errId).style.display='block';
-    descEl.focus();
-    return;
-  }
-  descEl.classList.remove('err');
-  document.getElementById(errId).style.display='none';
+function addSection(categoryName,bodyId,assayRowId,descId,fbId){
   const assays=getSelectedAssays(assayRowId);
   const chips=getSelectedChips(bodyId);
+  const desc=document.getElementById(descId)?document.getElementById(descId).value.trim():'';
   let title=categoryName;
   if(chips.length)title+=' ['+chips.join(', ')+']';
   cart.push({id:Date.now(),title,assays,desc});
   updateCartBadge();
   // reset
-  descEl.value='';
+  if(document.getElementById(descId))document.getElementById(descId).value='';
   document.querySelectorAll('#'+bodyId+' .atag').forEach(t=>t.classList.remove('sel'));
   document.querySelectorAll('#'+bodyId+' .cell-chip').forEach(c=>c.classList.remove('sel'));
   document.querySelectorAll('#'+bodyId+' .custom-assay-wrap').forEach(w=>w.classList.remove('show'));
@@ -1313,93 +1380,83 @@ function addSection(categoryName,bodyId,assayRowId,descId,errId,fbId){
   setTimeout(()=>{fb.style.display='none';},2500);
 }
 
-function addSectionSimple(categoryName,assayRowId,descId,errId,fbId){
-  const descEl=document.getElementById(descId);
-  const desc=descEl.value.trim();
-  if(!desc){
-    descEl.classList.add('err');
-    document.getElementById(errId).style.display='block';
-    descEl.focus();
-    return;
-  }
-  descEl.classList.remove('err');
-  document.getElementById(errId).style.display='none';
+function addSectionSimple(categoryName,assayRowId,descId,fbId){
   const assays=getSelectedAssays(assayRowId);
+  const desc=document.getElementById(descId)?document.getElementById(descId).value.trim():'';
   cart.push({id:Date.now(),title:categoryName,assays,desc});
   updateCartBadge();
-  descEl.value='';
+  if(document.getElementById(descId))document.getElementById(descId).value='';
   document.querySelectorAll('#'+assayRowId+' .atag').forEach(t=>t.classList.remove('sel'));
   const fb=document.getElementById(fbId);
   fb.style.display='block';
   setTimeout(()=>{fb.style.display='none';},2500);
 }
 
-
-/* ── MODULE DETAILS ── */
-.mod-details{margin-top:10px;margin-bottom:12px;display:flex;flex-direction:column;gap:6px;}
-.mod-detail{font-size:12px;color:var(--gr400);line-height:1.6;padding:8px 12px;background:var(--ch50);border-radius:6px;border-left:2px solid var(--ch300);}
-.mod-detail-name{font-weight:500;color:var(--ch600);}
 /* ── IN VIVO ── */
-let inVivoSelected=[];
-function toggleInVivo(name,btnId){
-  const btn=document.getElementById(btnId);
-  const idx=inVivoSelected.indexOf(name);
-  if(idx>-1){
-    inVivoSelected.splice(idx,1);
-    btn.textContent='+ Select';
-    btn.classList.remove('added');
-  } else {
-    inVivoSelected.push(name);
-    btn.textContent='✓ Selected';
-    btn.classList.add('added');
-  }
-  const panel=document.getElementById('invivo-desc-panel');
-  if(inVivoSelected.length>0){
-    panel.style.display='block';
-    document.getElementById('invivo-selected-label').textContent='Selected: '+inVivoSelected.join(', ');
-  } else {
-    panel.style.display='none';
-  }
+function toggleModCard(card,mid,modName){
+  card.classList.toggle('sel');
 }
-function confirmInVivo(){
-  const descEl=document.getElementById('desc-invivo');
-  const desc=descEl.value.trim();
-  if(!desc){
-    descEl.classList.add('err');
-    document.getElementById('err-invivo').style.display='block';
-    descEl.focus();
-    return;
-  }
-  if(inVivoSelected.length===0){alert('Please select at least one in vivo model.');return;}
-  descEl.classList.remove('err');
-  document.getElementById('err-invivo').style.display='none';
-  cart.push({
-    id:Date.now(),
-    title:'In Vivo — '+inVivoSelected.join(' + '),
-    assays:inVivoSelected.slice(),
-    desc
-  });
-  // reset
-  inVivoSelected.forEach(n=>{
-    const map={'Bleomycin-Induced Dermal Fibrosis':'btn-bleo-d','Topoisomerase-I-Induced Systemic Sclerosis':'btn-topo','cGvHD-Induced Scleroderma':'btn-cgvhd','HisRS-Induced Anti-Synthetase Syndrome':'btn-hisrs','Bleomycin-Induced Pulmonary Fibrosis':'btn-bleo-p','UUO-Induced Renal Fibrosis':'btn-uuo','CCl4-Induced Hepatic Fibrosis':'btn-ccl4'};
-    const b=document.getElementById(map[n]);
-    if(b){b.textContent='+ Select';b.classList.remove('added');}
-  });
-  inVivoSelected=[];
-  descEl.value='';
-  document.getElementById('invivo-desc-panel').style.display='none';
+
+function addInVivo(modelTitle,mid,fbId){
+  const mods=Array.from(document.querySelectorAll('#mods-'+mid+' .mod-card.sel')).map(c=>c.dataset.mod);
+  const custom=document.getElementById('custom-'+mid)?document.getElementById('custom-'+mid).value.trim():'';
+  const details=[];
+  if(mods.length)details.push(...mods);
+  if(custom)details.push('Custom: '+custom);
+  cart.push({id:Date.now(),title:'In Vivo — '+modelTitle,assays:details,desc:''});
   updateCartBadge();
-  const fb=document.getElementById('fb-invivo');
+  // reset
+  document.querySelectorAll('#mods-'+mid+' .mod-card').forEach(c=>c.classList.remove('sel'));
+  if(document.getElementById('custom-'+mid))document.getElementById('custom-'+mid).value='';
+  const fb=document.getElementById(fbId);
   fb.style.display='block';
   setTimeout(()=>{fb.style.display='none';},2500);
 }
-function addCustomPackage(){
-  const txt=document.getElementById('custom-pkg-text').value.trim();
-  if(!txt){alert('Please describe your custom package needs.');return;}
-  cart.push({id:Date.now(),title:'In Vivo — Custom Package',assays:[],desc:txt});
-  document.getElementById('custom-pkg-text').value='';
-  updateCartBadge();
+
+/* ── EX VIVO ── */
+function toggleExVivo(hd){
+  hd.classList.toggle('open');
+  hd.nextElementSibling.classList.toggle('open');
 }
+
+function addExVivo(){
+  const assays=getSelectedAssays('assays-exvivo');
+  const omicsText=document.querySelector('#custom-exomics textarea')?document.querySelector('#custom-exomics textarea').value.trim():'';
+  const customText=document.querySelector('#custom-excustom textarea')?document.querySelector('#custom-excustom textarea').value.trim():'';
+  const details=[...assays];
+  if(omicsText)details.push('Omics details: '+omicsText);
+  if(customText)details.push('Custom: '+customText);
+  cart.push({id:Date.now(),title:'Ex Vivo — Precision cut SSc skin slices',assays:details,desc:''});
+  updateCartBadge();
+  document.querySelectorAll('#assays-exvivo .atag').forEach(t=>t.classList.remove('sel'));
+  document.querySelectorAll('#body-exvivo .custom-assay-wrap').forEach(w=>w.classList.remove('show'));
+  if(document.querySelector('#custom-exomics textarea'))document.querySelector('#custom-exomics textarea').value='';
+  if(document.querySelector('#custom-excustom textarea'))document.querySelector('#custom-excustom textarea').value='';
+  const fb=document.getElementById('fb-exvivo');
+  fb.style.display='block';
+  setTimeout(()=>{fb.style.display='none';},2500);
+}
+
+/* ── PILLAR JUMP ── */
+function jumpToSvc(id){
+  const el=document.getElementById(id);
+  if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+/* ── BACK TO TOP (scroll spy) ── */
+(function(){
+  const svcPage=document.getElementById('p-services');
+  const btn=document.getElementById('svc-back-top');
+  if(!svcPage||!btn)return;
+  function checkScroll(){
+    if(svcPage.classList.contains('active')&&window.scrollY>400){
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  }
+  window.addEventListener('scroll',checkScroll,{passive:true});
+})();
 
 function removeFromCart(id){cart=cart.filter(c=>c.id!==id);updateCartBadge();renderCart();}
 function updateCartBadge(){
@@ -1423,8 +1480,8 @@ function renderCart(){
         <div class="ci-title">${item.title}</div>
         <button class="ci-rm" onclick="removeFromCart(${item.id})">Remove</button>
       </div>
-      ${item.assays.length?'<div class="ci-assays">Assays / Models: '+item.assays.join(', ')+'</div>':''} 
-      <div class="ci-desc">&ldquo;${item.desc}&rdquo;</div>
+      ${item.assays.length?'<div class="ci-assays">Assays / Models: '+item.assays.join(' · ')+'</div>':''}
+      ${item.desc?'<div class="ci-desc">&ldquo;'+item.desc+'&rdquo;</div>':''}
     </div>
   `).join('')+'</div>';
   countNum.textContent=cart.length;
@@ -1438,86 +1495,6 @@ function submitForm(){
   const summary=cart.length?cart.map(c=>'• '+c.title+': "'+c.desc+'"').join('\n'):'(No specific services selected)';
   alert(`Thank you, ${name}!\n\nYour research request has been received.\n\nServices requested:\n${summary}\n\nWe will respond at ${email} within 2 business days.\n\n— 4D Science GmbH, Düsseldorf`);
 }
-
-/* ── NO-DESC ADD (In Vitro, OMICs, Clinical) ── */
-function addSectionND(categoryName,bodyIdOrAssayRow,assayRowIdOrFb,fbIdOrUndef){
-  // Supports both 4-arg (categoryName,bodyId,assayRowId,fbId) 
-  // and 3-arg (categoryName,assayRowId,fbId) calls
-  let bodyId, assayRowId, fbId;
-  if(fbIdOrUndef===undefined){
-    // 3-arg call: no bodyId
-    bodyId=null; assayRowId=bodyIdOrAssayRow; fbId=assayRowIdOrFb;
-  } else {
-    bodyId=bodyIdOrAssayRow; assayRowId=assayRowIdOrFb; fbId=fbIdOrUndef;
-  }
-  const assays=getSelectedAssays(assayRowId);
-  const chips=bodyId?getSelectedChips(bodyId):[];
-  let title=categoryName;
-  if(chips.length)title+=' ['+chips.join(', ')+']';
-  cart.push({id:Date.now(),title,assays,desc:assays.length?'Selected: '+assays.join(', '):'Service selected'});
-  updateCartBadge();
-  if(bodyId){
-    document.querySelectorAll('#'+bodyId+' .atag').forEach(t=>t.classList.remove('sel'));
-    document.querySelectorAll('#'+bodyId+' .cell-chip').forEach(c=>c.classList.remove('sel'));
-    document.querySelectorAll('#'+bodyId+' .custom-assay-wrap').forEach(w=>w.classList.remove('show'));
-  } else {
-    document.querySelectorAll('#'+assayRowId+' .atag').forEach(t=>t.classList.remove('sel'));
-  }
-  const fb=document.getElementById(fbId);
-  if(fb){fb.style.display='block';setTimeout(()=>{fb.style.display='none';},2500);}
-}
-
-/* ── IN VIVO per-model add ── */
-function addInVivoModel(modelName,modsId,customId,fbId){
-  const mods=getSelectedAssays(modsId);
-  const customEl=document.getElementById(customId);
-  const customText=customEl?customEl.value.trim():'';
-  let title='In Vivo — '+modelName;
-  let desc=mods.length?'Modules: '+mods.join(', '):'Model selected';
-  if(customText)desc+=' | Custom: '+customText;
-  cart.push({id:Date.now(),title,assays:mods,desc});
-  updateCartBadge();
-  document.querySelectorAll('#'+modsId+' .atag').forEach(t=>t.classList.remove('sel'));
-  if(customEl){customEl.value='';customEl.closest('.custom-assay-wrap').classList.remove('show');}
-  const fb=document.getElementById(fbId);
-  fb.style.display='block';
-  setTimeout(()=>{fb.style.display='none';},2500);
-}
-
-/* ── EX VIVO add ── */
-function addExVivo(assayRowId,omicsId,customId,fbId){
-  const services=getSelectedAssays(assayRowId);
-  let desc=services.length?'Services: '+services.join(', '):'Ex vivo service selected';
-  const omicsEl=document.getElementById(omicsId);
-  const customEl=document.getElementById(customId);
-  if(omicsEl&&omicsEl.value.trim())desc+=' | Omics: '+omicsEl.value.trim();
-  if(customEl&&customEl.value.trim())desc+=' | Custom: '+customEl.value.trim();
-  cart.push({id:Date.now(),title:'Ex Vivo — Precision cut SSc skin slices',assays:services,desc});
-  updateCartBadge();
-  document.querySelectorAll('#'+assayRowId+' .atag').forEach(t=>t.classList.remove('sel'));
-  if(omicsEl){omicsEl.value='';document.getElementById('exvivo-omics-wrap').classList.remove('show');}
-  if(customEl){customEl.value='';document.getElementById('exvivo-custom-wrap').classList.remove('show');}
-  const fb=document.getElementById(fbId);
-  fb.style.display='block';
-  setTimeout(()=>{fb.style.display='none';},2500);
-}
-
-/* ── Services back-to-top visibility ── */
-function handleSvcScroll(){
-  const btn=document.getElementById('svc-back-top');
-  if(!btn)return;
-  const pillars=document.getElementById('svc-pillars');
-  if(!pillars){btn.classList.remove('visible');return;}
-  const rect=pillars.getBoundingClientRect();
-  if(rect.bottom<0)btn.classList.add('visible');
-  else btn.classList.remove('visible');
-}
-function scrollToSvc(id){
-  const el=document.getElementById(id);
-  if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
-}
-window.addEventListener('scroll',handleSvcScroll,{passive:true});
-
 renderPubs('all');
 
   /* ── OPTION A HERO: inject portrait ── */
